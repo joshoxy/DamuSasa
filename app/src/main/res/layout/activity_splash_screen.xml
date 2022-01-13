@@ -15,7 +15,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="center_vertical"
-       android:background="#fff"
+       android:background="@drawable/splash_bg"
        android:orientation="vertical">
 
        <ImageView

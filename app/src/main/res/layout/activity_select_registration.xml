@@ -39,6 +39,7 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:gravity="center"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -63,7 +64,7 @@
                     android:id="@+id/donorButton"
                     android:text="Donor Registration"
                     android:textAllCaps="false"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#fff"
@@ -78,7 +79,7 @@
                     android:id="@+id/recipientButton"
                     android:text="Recipient Registration"
                     android:textAllCaps="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="#fff"
