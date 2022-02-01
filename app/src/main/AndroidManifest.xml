@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecipientRegistrationActivity"
             android:exported="false" />
         <activity
