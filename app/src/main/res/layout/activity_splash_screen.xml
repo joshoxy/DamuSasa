@@ -40,7 +40,7 @@
 
        <TextView
            android:id="@+id/slogan"
-           android:text="Damu kwa wote"
+           android:text="A drop of blood can save a life"
            android:textColor="#000"
            android:textSize="20sp"
            android:gravity="center"

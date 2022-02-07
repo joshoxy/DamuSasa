@@ -53,6 +53,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         //Fetch image with glide
         Glide.with(context).load(user.getProfilepictureurl()).into(holder.userProfileImage);
 
+
+
     }
 
     @Override
