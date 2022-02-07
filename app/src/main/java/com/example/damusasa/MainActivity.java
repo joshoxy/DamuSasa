@@ -6,24 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.damusasa.Adapter.UserAdapter;
+import com.example.damusasa.Model.User;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView nav_fullname, nav_email, nav_bloodgroup, nav_type;
     private DatabaseReference userRef;
     private StorageReference storageReference;
+
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+
+    private List<User> userList;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +72,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         nav_view.setNavigationItemSelectedListener(this);
+
+        progressBar = findViewById(R.id.progressBar);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+
+        userList = new ArrayList<>();
+        userAdapter = new UserAdapter(MainActivity.this, userList);
+
+        recyclerView.setAdapter(userAdapter);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String type = snapshot.child("type").getValue().toString();
+                if (type.equals("donor")){
+                    readRecipients();
+                }else {
+                    readDonors();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         nav_profile_image = nav_view.getHeaderView(0).findViewById(R.id.nav_user_image);
         nav_fullname = nav_view.getHeaderView(0).findViewById(R.id.nav_user_fullname);
@@ -101,6 +150,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    private void readDonors() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        Query query = reference.orderByChild("type").equalTo("donor");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+
+                if (userList.isEmpty()){
+                    Toast.makeText(MainActivity.this, "No donors found !", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void readRecipients() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        Query query = reference.orderByChild("type").equalTo("recipient");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+
+                if (userList.isEmpty()){
+                    Toast.makeText(MainActivity.this, "No recipients found !", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

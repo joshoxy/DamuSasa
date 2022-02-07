@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/mainLayout"
@@ -88,6 +88,7 @@
             android:layout_gravity="center_vertical"
             android:background="@drawable/buttons_background"
             android:text="Request"
+            android:visibility="gone"
             android:textAllCaps="false"/>
     </LinearLayout>
 

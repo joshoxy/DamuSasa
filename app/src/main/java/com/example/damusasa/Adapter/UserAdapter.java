@@ -39,10 +39,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final User user = userList.get(position);
         holder.type.setText(user.getType());
+
+        //Filter donors out
+        if (user.getType().equals("donor")){
+            holder.emailNow.setVisibility(View.VISIBLE);
+        }
+
         holder.userEmail.setText(user.getEmail());
         holder.phoneNumber.setText(user.getPhoneNumber());
         holder.userName.setText(user.getName());
         holder.bloodGroup.setText(user.getBloodGroup());
+
+        //Fetch image with glide
         Glide.with(context).load(user.getProfilepictureurl()).into(holder.userProfileImage);
 
     }
