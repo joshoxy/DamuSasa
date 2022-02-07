@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView type, name, email, idNUmber, phoneNumber, bloodGroup;
     private CircleImageView profileImage;
     private Button backButton;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,13 @@ public class ProfileActivity extends AppCompatActivity {
                     email.setText(snapshot.child("email").getValue().toString());
                     bloodGroup.setText(snapshot.child("bloodGroup").getValue().toString());
 
-                    Glide.with(getApplicationContext()).load(snapshot.child("profilepictureurl").getValue().toString()).into(profileImage);
+                    if (snapshot.hasChild("profilepictureurl")){
+                        //Fetch image from firebase using Glider dependency
+                        Glide.with(getApplicationContext()).load(snapshot.child("profilepictureurl").getValue().toString()).into(profileImage);
+                    }else{
+                        profileImage.setImageResource(R.drawable.profile_image);
 
+                    }
 
                 }
 

@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CircleImageView nav_profile_image;
     private TextView nav_fullname, nav_email, nav_bloodgroup, nav_type;
     private DatabaseReference userRef;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +84,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    String type = snapshot.child("type").getValue().toString();
                    nav_type.setText(type);
 
-                   String imageUrl = snapshot.child("profilepictureurl").getValue().toString();
-                   Glide.with(getApplicationContext()).load(imageUrl).into(nav_profile_image);  //Fetch image from firebase using Glider dependency
+                   if (snapshot.hasChild("profilepictureurl")){
+                       //Fetch image from firebase using Glider dependency
+                       String imageUrl = snapshot.child("profilepictureurl").getValue().toString();
+                       Glide.with(getApplicationContext()).load(imageUrl).into(nav_profile_image);
+                   }else{
+                       nav_profile_image.setImageResource(R.drawable.profile_image);
+                   }
 
                }
             }
@@ -101,6 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent2 = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent2);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
