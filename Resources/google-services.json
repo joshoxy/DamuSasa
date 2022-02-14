@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506681999966",
+    "project_id": "damusasa-e2548",
+    "storage_bucket": "damusasa-e2548.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506681999966:android:dd5755ff07fe200cee2acf",
+        "android_client_info": {
+          "package_name": "com.example.damusasa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506681999966-7q01p88enecqpn10uim5i4mjij13sdch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.damusasa",
+            "certificate_hash": "40648fd159ece84df4451061da17eea07ff15a38"
+          }
+        },
+        {
+          "client_id": "506681999966-d3tkeegj0mrcc5s97mdce8knh21fnrub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOmb2nIAK8TRKgGcsPTgRbSDyrl0oFOjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506681999966-d3tkeegj0mrcc5s97mdce8knh21fnrub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
