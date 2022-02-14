@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.damusasa.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,8 +36,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -157,6 +161,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                 userInfo.put("type","donor");
                                 userInfo.put("search","donor"+bloodGroup);
 
+
                                 userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
@@ -172,9 +177,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                 });
 
 
-
                                 //Upload Image to firebase
-
                                 if (resultUri != null){
                                     final StorageReference filePath = FirebaseStorage.getInstance().getReference()
                                             .child("profile images").child(currentUserId);
@@ -245,27 +248,30 @@ public class DonorRegistrationActivity extends AppCompatActivity {
         });
     }
 
+   //Original On ActivityResult
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null){
             resultUri = data.getData();
+
             profile_image.setImageURI(resultUri);
 
             //Tutorial method for picture
-//            uploadPicture();
+            /*uploadPicture();*/
         }
     }
 
     //Upload picture method from tutorial
-    /*private void uploadPicture() {
+  /*  private void uploadPicture() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Uploading Image...");
         progressDialog.show();
 
-        final String randomKey = UUID.randomUUID().toString();
         // Create a reference to "mountains.jpg"
-        StorageReference imageRef = storageReference.child("images/" +randomKey);
+        //His filePath is my resultUri
+        FirebaseStorage imgstorage = FirebaseStorage.getInstance();
+        StorageReference imageRef = imgstorage.getReference("images/" +new Random().nextInt(50));
 
         imageRef.putFile(resultUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -274,7 +280,9 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                userDatabaseRef.setValue(uri.toString());
+//                                User obj = new User(uri.toString());
+                               userDatabaseRef.setValue(uri.toString());
+//                                profile_image.setImageResource(R.drawable.ic_profile);
 
                             }
                         });
@@ -294,7 +302,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
                         progressDialog.setMessage("Progress: " + (int) progressPercent + "%");
                     }
                 });
