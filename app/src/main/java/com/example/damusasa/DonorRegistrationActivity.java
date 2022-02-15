@@ -145,7 +145,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
                                 String error = task.getException().toString();
-                                Toast.makeText(DonorRegistrationActivity.this, "Error" + error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DonorRegistrationActivity.this, "Error " + error, Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 String currentUserId = mAuth.getCurrentUser().getUid();
@@ -160,22 +160,6 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                 userInfo.put("bloodGroup",bloodGroup);
                                 userInfo.put("type","donor");
                                 userInfo.put("search","donor"+bloodGroup);
-
-
-                                userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
-                                    @Override
-                                    public void onComplete(@NonNull Task task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(DonorRegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(DonorRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                        }
-
-                                        finish();
-                                        //loader.dismiss();
-                                    }
-                                });
-
 
                                 //Upload Image to firebase
                                 if (resultUri != null){
@@ -218,7 +202,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task task) {
                                                                 if (task.isSuccessful()){
-                                                                    Toast.makeText(DonorRegistrationActivity.this, "Image url added to db successfully", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(DonorRegistrationActivity.this, "Profile photo set successfully", Toast.LENGTH_SHORT).show();
                                                                 }else{
                                                                     Toast.makeText(DonorRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                                                 }
@@ -229,16 +213,34 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                                     }
                                                 });
 
-                                                Intent intent = new Intent(DonorRegistrationActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                                loader.dismiss();
+
 
                                             }
                                         }
                                     });
                                 }
                                 //end of upload image code
+
+
+                                userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(DonorRegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(DonorRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        finish();
+                                        //loader.dismiss();
+                                    }
+                                });
+
+                                Intent intent = new Intent(DonorRegistrationActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                                loader.dismiss();
+
                             }
                         }
                     });

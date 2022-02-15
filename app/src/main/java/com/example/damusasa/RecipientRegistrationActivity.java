@@ -146,20 +146,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity {
                                 userInfo.put("type","recipient");
                                 userInfo.put("search","recipient"+bloodGroup);
 
-                                userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
-                                    @Override
-                                    public void onComplete(@NonNull Task task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(RecipientRegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(RecipientRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                        }
-
-                                        finish();
-                                        //loader.dismiss();
-                                    }
-                                });
-
                                 //Upload Image to firebase
 
                                 if (resultUri != null){
@@ -202,7 +188,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task task) {
                                                                 if (task.isSuccessful()){
-                                                                    Toast.makeText(RecipientRegistrationActivity.this, "Image url added to db successfully", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(RecipientRegistrationActivity.this, "Profile photo set successfully", Toast.LENGTH_SHORT).show();
                                                                 }else{
                                                                     Toast.makeText(RecipientRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                                                 }
@@ -213,15 +199,33 @@ public class RecipientRegistrationActivity extends AppCompatActivity {
                                                     }
                                                 });
 
-                                                Intent intent = new Intent(RecipientRegistrationActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                                loader.dismiss();
-
                                             }
                                         }
                                     });
                                 }
+
+
+                                userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(RecipientRegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(RecipientRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        finish();
+                                        //loader.dismiss();
+                                    }
+                                });
+
+                                //Add Intent here
+                                Intent intent = new Intent(RecipientRegistrationActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                                loader.dismiss();
+
+                                //end of upload image to db
                             }
                         }
                     });
