@@ -28,7 +28,7 @@
 
        <TextView
            android:id="@+id/title"
-           android:text="DamuSasa"
+           android:text="Damuliza"
            android:textColor="#000"
            android:textSize="30sp"
            android:textStyle="bold"

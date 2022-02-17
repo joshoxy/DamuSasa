@@ -34,7 +34,7 @@
                 android:src="@drawable/logo"/>
 
             <TextView
-                android:text="Welcome to DamuSasa"
+                android:text="Welcome to Damuliza"
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:textStyle="bold"
