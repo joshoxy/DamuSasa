@@ -76,6 +76,7 @@ public class JavaMailApi extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void unused) {
+        progressDialog.dismiss();
         startAlertDialogue();
         super.onPostExecute(unused);
     }
