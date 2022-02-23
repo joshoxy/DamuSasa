@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -141,6 +142,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                        nav_profile_image.setImageResource(R.drawable.profile_image);
                    }
 
+                   //Change menu based on who is logged in **
+                   Menu nav_menu = nav_view.getMenu();
+
+                   if (type.equals("donor")){
+                       nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
+                   }
+
                }
             }
 
@@ -263,6 +271,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent11 = new Intent(MainActivity.this, CategorySelectedActivity.class);
                 intent11.putExtra("group", "Compatible with you");
                 startActivity(intent11);
+                break;
+
+            case R.id.sentEmail:
+                Intent intent12 = new Intent(MainActivity.this, SentEmailsActivity.class);
+                startActivity(intent12);
                 break;
 
             case R.id.profile:
