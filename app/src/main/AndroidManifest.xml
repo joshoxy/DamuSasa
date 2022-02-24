@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SentEmailsActivity"
             android:exported="false" />
         <activity

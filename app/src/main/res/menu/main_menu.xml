@@ -65,6 +65,7 @@
                     android:title="Profile"/>
                 <item
                     android:id="@+id/notifications"
+                    android:visible="false"
                     android:icon="@drawable/ic_notifications"
                     android:title="Notifications"/>
                 <item

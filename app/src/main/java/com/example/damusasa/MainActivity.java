@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                    if (type.equals("donor")){
                        nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
+                       nav_menu.findItem(R.id.notifications).setVisible(true);
                    }
 
                }
@@ -276,6 +277,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.sentEmail:
                 Intent intent12 = new Intent(MainActivity.this, SentEmailsActivity.class);
                 startActivity(intent12);
+                break;
+
+            case R.id.notifications:
+                Intent intent13 = new Intent(MainActivity.this, NotificationsActivity.class);
+                startActivity(intent13);
                 break;
 
             case R.id.profile:
