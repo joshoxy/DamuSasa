@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("DamuSasa");
+        getSupportActionBar().setTitle("DamuLiza");
 
         drawerLayout = findViewById(R.id.drawerLayout);
         nav_view = findViewById(R.id.nav_view);
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    if (type.equals("donor")){
                        nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
                        nav_menu.findItem(R.id.notifications).setVisible(true);
+                       nav_menu.findItem(R.id.book).setVisible(true);
                    }
 
                }
@@ -282,6 +283,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.notifications:
                 Intent intent13 = new Intent(MainActivity.this, NotificationsActivity.class);
                 startActivity(intent13);
+                break;
+
+            case R.id.book:
+                Intent intent14 = new Intent(MainActivity.this, BookingActivity.class);
+                startActivity(intent14);
                 break;
 
             case R.id.profile:

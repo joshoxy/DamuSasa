@@ -7,6 +7,12 @@
         android:title="Home"/>
 
     <item
+        android:id="@+id/book"
+        android:icon="@drawable/ic_book"
+        android:visible="false"
+        android:title="Book Appointment"/>
+
+    <item
         android:id="@+id/sentEmail"
         android:icon="@drawable/ic_check"
         android:title="Sent requests"/>
@@ -77,7 +83,7 @@
         </menu>
     </item>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -91,6 +97,6 @@
 
             </group>
         </menu>
-    </item>
+    </item>-->
 
 </menu>

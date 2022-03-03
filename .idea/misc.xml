@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/book.xml" value="0.2101851851851852" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/buttons_background.xml" value="0.18055555555555555" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/gradient_bg.xml" value="0.18055555555555555" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/header_background.xml" value="0.2638888888888889" />
@@ -14,6 +15,8 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/navigation_selector.xml" value="0.2101851851851852" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/navigation_view_item_selected.xml" value="0.2101851851851852" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/splash_bg.xml" value="0.23703703703703705" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/step_buttons_background.xml" value="0.20555555555555555" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_booking.xml" value="0.2" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_category_selected.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_donor_registration.xml" value="0.2" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -24,6 +27,9 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_select_registration.xml" value="0.264" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_sent_emails.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_splash_screen.xml" value="0.1793478260869565" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_one.xml" value="0.25407608695652173" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_three.xml" value="0.25407608695652173" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_two.xml" value="0.25407608695652173" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/header.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/notification_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/output_layout.xml" value="0.2504528985507246" />
