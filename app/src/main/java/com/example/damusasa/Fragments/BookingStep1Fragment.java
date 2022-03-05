@@ -1,5 +1,6 @@
 package com.example.damusasa.Fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.damusasa.Adapter.MyBranchAdapter;
+import com.example.damusasa.Common.SpacesItemDecoration;
 import com.example.damusasa.Interface.AllCenters;
+import com.example.damusasa.Interface.IBranchLoadListener;
+import com.example.damusasa.Model.Branch;
 import com.example.damusasa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,21 +34,24 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dmax.dialog.SpotsDialog;
 
 
-public class BookingStep1Fragment extends Fragment implements AllCenters {
+public class BookingStep1Fragment extends Fragment implements AllCenters, IBranchLoadListener {
 
 //His allSalon Ref is my Centers **
     CollectionReference Centers;
-CollectionReference Branches;
+CollectionReference branchRef;
 
 
 //His IAllSalonLoadListener is here **
 AllCenters allCenters;
+IBranchLoadListener iBranchLoadListener;
 
     @BindView(R.id.recycler_one) RecyclerView recycler_centers;
     @BindView(R.id.spinner) MaterialSpinner spinner;
     Unbinder unbinder;
+    AlertDialog dialog;
 
     static BookingStep1Fragment instance;
 
@@ -58,6 +67,9 @@ AllCenters allCenters;
 
         Centers = FirebaseFirestore.getInstance().collection("DonationCenters");
         allCenters = this;
+        iBranchLoadListener = this;
+
+        dialog = new SpotsDialog.Builder().setContext(getActivity()).build();
     }
 
     @Nullable
@@ -66,9 +78,16 @@ AllCenters allCenters;
         super.onCreateView(inflater, container, savedInstanceState);
         View itemView = inflater.inflate(R.layout.fragment_booking_step_one, container,false);
         unbinder = ButterKnife.bind(this, itemView);
+        initView();
 
         loadAllCenters();
         return itemView;
+    }
+
+    private void initView() {
+        recycler_centers.setHasFixedSize(true);
+        recycler_centers.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recycler_centers.addItemDecoration(new SpacesItemDecoration(4));
     }
 
     private void loadAllCenters() {
@@ -95,12 +114,63 @@ AllCenters allCenters;
     @Override
     public void onAllCentersLoadSuccess(List<String> areaNameList) {
         spinner.setItems(areaNameList);
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if (position > 0){
+                    loadBranchofCity(item.toString());
+                }else
+                    recycler_centers.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    private void loadBranchofCity(String cityName) {
+        dialog.show();
+        branchRef = FirebaseFirestore.getInstance()
+                .collection("DonationCenters")
+                .document(cityName)
+                .collection("Branch");
+
+        branchRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                List<Branch> list = new ArrayList<>();
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot:task.getResult())
+                        list.add(documentSnapshot.toObject(Branch.class));
+                    iBranchLoadListener.onBranchLoadSuccess(list);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iBranchLoadListener.onBranchLoadFailed(e.getMessage());
+            }
+        });
 
     }
 
     @Override
     public void onAllCenterLoadFailed(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onBranchLoadSuccess(List<Branch> branchList) {
+        MyBranchAdapter adapter = new MyBranchAdapter(getActivity(), branchList);
+        recycler_centers.setAdapter(adapter);
+        recycler_centers.setVisibility(View.VISIBLE);
+        dialog.dismiss();
+
+    }
+
+    @Override
+    public void onBranchLoadFailed(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
 
     }
 }
