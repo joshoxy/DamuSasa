@@ -40,7 +40,7 @@ import dmax.dialog.SpotsDialog;
 public class BookingStep1Fragment extends Fragment implements AllCenters, IBranchLoadListener {
 
 //His allSalon Ref is my Centers **
-    CollectionReference Centers;
+CollectionReference Centers;
 CollectionReference branchRef;
 
 
@@ -66,7 +66,7 @@ IBranchLoadListener iBranchLoadListener;
         super.onCreate(savedInstanceState);
 
         Centers = FirebaseFirestore.getInstance().collection("DonationCenters");
-        allCenters = this;
+        allCenters = this;  //His iAllSalonLoadListener is here **
         iBranchLoadListener = this;
 
         dialog = new SpotsDialog.Builder().setContext(getActivity()).build();
@@ -139,7 +139,11 @@ IBranchLoadListener iBranchLoadListener;
                 List<Branch> list = new ArrayList<>();
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot documentSnapshot:task.getResult())
-                        list.add(documentSnapshot.toObject(Branch.class));
+                    {
+                        Branch branch = documentSnapshot.toObject(Branch.class);
+                        branch.setBranchId(documentSnapshot.getId());
+                        list.add(branch);
+                    }
                     iBranchLoadListener.onBranchLoadSuccess(list);
                 }
             }
