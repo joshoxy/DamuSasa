@@ -52,8 +52,15 @@ public class BookingActivity extends AppCompatActivity {
 
                 }
             }
+            else if (Common.step == 2) //Choose time
+            {
+                loadTimeSlot(Common.currentBarber.getBranchId());  //This is different from his
+            }
             viewPager.setCurrentItem(Common.step);
         }
+    }
+
+    private void loadTimeSlot(String branchId) {
     }
 
     //Broadcast Receiver
