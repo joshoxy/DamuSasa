@@ -61,12 +61,17 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void loadTimeSlot(String branchId) {
+        //Send broadcast to fragment 2
+        Intent intent = new Intent(Common.KEY_DISPLAY_TIME_SLOT);
+        localBroadcastManager.sendBroadcast(intent);
     }
 
     //Broadcast Receiver
     private BroadcastReceiver buttonNextReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            int step = intent.getIntExtra(Common.KEY_STEP, 0); //Might need to disable this
             Common.currentBarber = intent.getParcelableExtra(Common.KEY_SALON_STORE);
             btn_next_step.setEnabled(true);
             setColorButton();
@@ -123,6 +128,8 @@ public class BookingActivity extends AppCompatActivity {
                     btn_previous_step.setEnabled(false);
                 else
                     btn_previous_step.setEnabled(true);
+                //Set disable button
+                btn_next_step.setEnabled(false);
                 setColorButton();
 
             }

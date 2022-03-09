@@ -62,6 +62,7 @@ public class MyBranchAdapter extends RecyclerView.Adapter<MyBranchAdapter.MyView
 
                 Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
                 intent.putExtra(Common.KEY_SALON_STORE, branchList.get(pos));
+                intent.putExtra(Common.KEY_STEP, 1);  //Might need to disable this
                 localBroadcastManager.sendBroadcast(intent);
             }
         });
