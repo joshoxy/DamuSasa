@@ -43,7 +43,15 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txt_time_slot.setText(new StringBuilder(Common.convertTimeSlotToString(position)).toString());
-        if (timeSlotList.size() == 0) //Available time slots
+        //Paste without if()
+        holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
+        holder.txt_time_slot_description.setText("Available");
+        holder.txt_time_slot_description.setTextColor(context.getResources().getColor(android.R.color.black));
+        holder.txt_time_slot.setTextColor(context.getResources()
+                .getColor(android.R.color.black));
+
+
+        /*if (timeSlotList.size() == 0) //Available time slots
         {
             holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
             holder.txt_time_slot_description.setText("Available");
@@ -66,7 +74,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                 }
 
             }
-        }
+        }*/
 
     }
 

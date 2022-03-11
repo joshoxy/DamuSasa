@@ -66,8 +66,45 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
             Calendar date = Calendar.getInstance();
             date.add(Calendar.DATE, 0);  //Add current date
             //loadAvailableTimeSlot(Common.currentBarber.getBranchId(), simpleDateFormat.format(date.getTime()));
+
+            //New method without
+            loadAvailableTimeSlot();
         }
     };
+    //New method testing
+
+    private void loadAvailableTimeSlot() {
+        dialog.show();
+        iTimeSlotLoadListener.onTimeSlotLoadEmpty();
+        ///DonationCenters/Westlands/Branch/tAi9tXv8JadaPhuZuvZn
+        /*centerDoc = FirebaseFirestore.getInstance()
+                .collection("DonationCenters")
+                .document(Common.city)
+                .collection("Branch")
+                .document(Common.currentBarber.getBranchId());
+
+        centerDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot.exists()) //If center is available
+                    {
+                        iTimeSlotLoadListener.onTimeSlotLoadEmpty();
+                    }
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iTimeSlotLoadListener.onTimeSlotLoadFailed(e.getMessage());
+            }
+        });*/
+
+    }
+
+    //Original method
 
     /*private void loadAvailableTimeSlot(String branchId, String date) {
         dialog.show();
@@ -159,6 +196,9 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
                     selected_date = date;
                    /* loadAvailableTimeSlot(Common.currentBarber.getBranchId(),
                             simpleDateFormat.format(date.getTime()));*/
+
+                    //New method
+                     loadAvailableTimeSlot();
                 }
             }
         });
