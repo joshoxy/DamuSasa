@@ -1,17 +1,120 @@
 package com.example.damusasa.Fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.damusasa.Common.Common;
+import com.example.damusasa.Model.BookingInformation;
 import com.example.damusasa.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class BookingStep3Fragment extends Fragment {
+
+    SimpleDateFormat simpleDateFormat;
+    LocalBroadcastManager localBroadcastManager;
+    Unbinder unbinder;
+    private DatabaseReference userDatabaseRef;
+    private FirebaseAuth mAuth;
+    CollectionReference branchRef;
+
+    @BindView(R.id.booking_time)
+    TextView booking_time;
+
+    @BindView(R.id.txt_location)
+    TextView txt_location;
+
+    @BindView(R.id.txt_center_name)
+    TextView txt_center_name;
+
+    @BindView(R.id.txt_phone)
+    TextView txt_phone;
+
+    @OnClick(R.id.btn_confirm)
+            void confirmBooking(){
+
+        //Create booking information
+        BookingInformation bookingInformation = new BookingInformation();
+        bookingInformation.setCenterId(Common.currentBarber.getBranchId());
+        bookingInformation.setCenterAddress(Common.currentBarber.getAddress());
+        bookingInformation.setCenterName(Common.currentBarber.getName());
+        bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
+                .append(" on ")
+                .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
+        bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+
+        //Upload
+        DocumentReference bookingDate = FirebaseFirestore.getInstance()
+                .collection("DonationCenters")
+                .document(Common.city)
+                .collection("Branch")
+                .document(Common.currentBarber.getBranchId())
+                .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
+                .document(String.valueOf(Common.currentTimeSlot));
+
+        //Write
+        bookingDate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                getActivity().finish(); //Close Activity
+                Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            setData();
+
+        }
+    };
+
+    private void setData() {
+        booking_time.setText(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
+        .append(" on ")
+        .append(simpleDateFormat.format(Common.currentDate.getTime())));
+        txt_location.setText(Common.currentBarber.getAddress());
+        txt_center_name.setText(Common.currentBarber.getName());
+        txt_phone.setText(Common.currentBarber.getPhone());
+
+        //Mine
+
+    }
 
     static BookingStep3Fragment instance;
 
@@ -23,12 +126,24 @@ public class BookingStep3Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
+        localBroadcastManager.registerReceiver(confirmBookingReceiver, new IntentFilter(Common.KEY_CONFIRM_BOOKING));
+    }
+
+    @Override
+    public void onDestroy() {
+        localBroadcastManager.unregisterReceiver(confirmBookingReceiver);
+        super.onDestroy();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_booking_step_three, container,false);
+        View itemView = inflater.inflate(R.layout.fragment_booking_step_three, container,false);
+        unbinder = ButterKnife.bind(this, itemView);
+        return itemView;
     }
 }

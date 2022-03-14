@@ -36,7 +36,7 @@ public class BookingActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_previous_step)
     void previousStep(){
-        if (Common.step == 3 || Common.step > 0){
+        if (Common.step == 3 || Common.step > 0){  //Changed them from 3
             Common.step--;
             viewPager.setCurrentItem(Common.step);
         }
@@ -44,20 +44,33 @@ public class BookingActivity extends AppCompatActivity {
     //Event
     @OnClick(R.id.btn_next_step)
     void nextClick(){
-        if (Common.step < 3 || Common.step == 0){
+        if (Common.step < 3 || Common.step == 0){   //Changed them from 3
             Common.step++; //increase
             if (Common.step == 1) //After Choosing Center
             {
+                //this is his currentSalon
                 if (Common.currentBarber != null){
 
                 }
             }
-            else if (Common.step == 2) //Choose time
+            /*else if (Common.step == 2) //Choose time
             {
                 loadTimeSlot(Common.currentBarber.getBranchId());  //This is different from his
+            }*/
+
+            else if (Common.step == 2) //Choose time
+            {
+                if (Common.currentTimeSlot != -1)   //Might need to remove
+                confirmBooking();  //This is different from his
             }
             viewPager.setCurrentItem(Common.step);
         }
+    }
+
+    private void confirmBooking() {
+        //Send broadcast to step 3
+        Intent intent = new Intent(Common.KEY_CONFIRM_BOOKING);
+        localBroadcastManager.sendBroadcast(intent);
     }
 
     private void loadTimeSlot(String branchId) {
@@ -72,7 +85,14 @@ public class BookingActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             int step = intent.getIntExtra(Common.KEY_STEP, 0); //Might need to disable this
+            if (step == 1)
+                //this is his currentSalon
             Common.currentBarber = intent.getParcelableExtra(Common.KEY_SALON_STORE);
+            else if (step==2)
+                Common.currentTimeSlot = intent.getIntExtra(Common.KEY_TIME_SLOT, -1);
+
+            //His step 2 is barber select and my step 2 is time select
+
             btn_next_step.setEnabled(true);
             setColorButton();
         }
