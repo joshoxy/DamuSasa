@@ -21,55 +21,62 @@ public class BookingInformation {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
+    public String setCustomerName(String customerName) {
         this.customerName = customerName;
+        return customerName;
     }
 
     public String getCustomerPhone() {
         return customerPhone;
     }
 
-    public void setCustomerPhone(String customerPhone) {
+    public String setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
+        return customerPhone;
     }
 
     public String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public String setTime(String time) {
         this.time = time;
+        return time;  //Remove
     }
 
     public String getCenterId() {
         return centerId;
     }
 
-    public void setCenterId(String centerId) {
+    public String setCenterId(String centerId) {
         this.centerId = centerId;
+        return centerId;  //Remove
     }
 
     public String getCenterName() {
         return centerName;
     }
 
-    public void setCenterName(String centerName) {
+    public String setCenterName(String centerName) {
         this.centerName = centerName;
+        return centerName;  //Remove
     }
 
     public String getCenterAddress() {
         return centerAddress;
     }
 
-    public void setCenterAddress(String centerAddress) {
+    public String setCenterAddress(String centerAddress) {
         this.centerAddress = centerAddress;
+        return centerAddress;  //Remove
     }
 
     public Long getSlot() {
         return slot;
     }
 
-    public void setSlot(Long slot) {
+    public String setSlot(Long slot) {
         this.slot = slot;
+        return null;  //Remove
     }
 }

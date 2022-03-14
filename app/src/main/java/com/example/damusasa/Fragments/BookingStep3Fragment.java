@@ -19,11 +19,16 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.damusasa.Common.Common;
 import com.example.damusasa.Model.BookingInformation;
 import com.example.damusasa.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,7 +63,7 @@ public class BookingStep3Fragment extends Fragment {
     TextView txt_phone;
 
     @OnClick(R.id.btn_confirm)
-            void confirmBooking(){
+            /*void confirmBooking(){
 
         //Create booking information
         BookingInformation bookingInformation = new BookingInformation();
@@ -93,6 +98,64 @@ public class BookingStep3Fragment extends Fragment {
             }
         });
 
+
+    }*/
+
+    void confirmBooking(){
+
+        //Create booking information
+        BookingInformation bookingInformation = new BookingInformation();
+
+        String CenterId = bookingInformation.setCenterId(Common.currentBarber.getBranchId());
+        String CenterAddress = bookingInformation.setCenterAddress(Common.currentBarber.getAddress());
+        String CenterName = bookingInformation.setCenterName(Common.currentBarber.getName());
+        String Time = bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
+                .append(" on ")
+                .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
+        String Slot = bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(
+                FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String CustomerName = snapshot.child("name").getValue().toString();
+                    String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
+                    //Upload
+                    userDatabaseRef = FirebaseDatabase.getInstance().getReference()
+                            .child("appointments").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                    HashMap userInfo = new HashMap();
+                    userInfo.put("CustomerName",CustomerName);
+                    userInfo.put("CustomerPhone",CustomerPhone);
+                    userInfo.put("CenterId",CenterId);
+                    userInfo.put("centerName",CenterName);
+                    userInfo.put("CenterAddress",CenterAddress);
+                    userInfo.put("Time",Time);
+
+
+                    userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            getActivity().finish(); //Close Activity
+                            Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
