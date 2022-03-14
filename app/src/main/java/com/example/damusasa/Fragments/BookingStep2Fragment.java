@@ -182,7 +182,7 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.DATE, 0);
         Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.DATE, 2);
+        endDate.add(Calendar.DATE, 5);
 
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(itemView, R.id.calendarView)
                 .range(startDate, endDate)

@@ -34,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -139,6 +140,7 @@ public class BookingStep3Fragment extends Fragment {
                     userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
+                            resetStaticActivity();  //Allow user to book again
                             getActivity().finish(); //Close Activity
                             Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
                         }
@@ -157,6 +159,13 @@ public class BookingStep3Fragment extends Fragment {
             }
         });
 
+    }
+
+    private void resetStaticActivity() {
+        Common.step = 0;
+        Common.currentTimeSlot = -1;
+        Common.currentBarber = null;
+        Common.currentDate.add(Calendar.DATE, 0);  //Current date
     }
 
     BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
