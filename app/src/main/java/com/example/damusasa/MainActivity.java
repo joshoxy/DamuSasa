@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                        nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
                        nav_menu.findItem(R.id.notifications).setVisible(true);
                        nav_menu.findItem(R.id.book).setVisible(true);
+                       nav_menu.findItem(R.id.appointments).setVisible(true);
                    }
 
                }
@@ -288,6 +289,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.book:
                 Intent intent14 = new Intent(MainActivity.this, BookingActivity.class);
                 startActivity(intent14);
+                break;
+
+            case R.id.appointments:
+                Intent intent15 = new Intent(MainActivity.this, Appointments.class);
+                startActivity(intent15);
                 break;
 
             case R.id.profile:

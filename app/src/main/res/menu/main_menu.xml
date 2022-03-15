@@ -13,6 +13,12 @@
         android:title="Book Appointment"/>
 
     <item
+        android:id="@+id/appointments"
+        android:icon="@drawable/ic_time"
+        android:visible="false"
+        android:title="Appointments"/>
+
+    <item
         android:id="@+id/sentEmail"
         android:icon="@drawable/ic_check"
         android:title="Sent requests"/>
