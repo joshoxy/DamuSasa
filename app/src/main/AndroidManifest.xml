@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".CenterRegistration"
+            android:exported="false" />
+        <activity
             android:name=".Appointments"
             android:exported="false" />
         <activity
