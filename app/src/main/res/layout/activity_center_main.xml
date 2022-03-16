@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/center_toolbar"
             android:elevation="4dp"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
@@ -29,13 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/center_progressBar"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/center_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

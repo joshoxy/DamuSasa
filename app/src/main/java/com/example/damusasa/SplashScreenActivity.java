@@ -34,7 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         title.setAnimation(bottomAnimation);
         slogan.setAnimation(bottomAnimation);
 
-        int SPLASH_SCREEN = 4300;
+        int SPLASH_SCREEN = 4000;
 
         new Handler().postDelayed(new Runnable() {
             @Override

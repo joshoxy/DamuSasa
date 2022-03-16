@@ -36,7 +36,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CenterMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,7 +58,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_center_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.center_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("DamuLiza");
 
@@ -73,11 +72,11 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
         nav_center_view.setNavigationItemSelectedListener(this);
 
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.center_progressBar);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.center_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
 
         userList = new ArrayList<>();
@@ -94,6 +93,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 String type = snapshot.child("type").getValue().toString();
                 if (type.equals("center")){
                     readDonors();
+                    readRecipients();
                 }
             }
 

@@ -57,6 +57,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         //Filter donors out
         if (user.getType().equals("donor")){
             holder.emailNow.setVisibility(View.VISIBLE);
+        } else if (user.getType().equals("center")){
+            holder.emailNow.setVisibility(View.GONE);
         }
 
         holder.userEmail.setText(user.getEmail());
