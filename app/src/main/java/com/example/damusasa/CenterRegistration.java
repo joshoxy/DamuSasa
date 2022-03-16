@@ -126,6 +126,7 @@ public class CenterRegistration extends AppCompatActivity {
                                 userInfo.put("centerLocation",centerLocation);
                                 userInfo.put("centerAddress",centerAddress);
                                 userInfo.put("centerPhone",centerPhone);
+                                userInfo.put("centerEmail",centerEmail);
                                 userInfo.put("type","center");
 
 
@@ -143,7 +144,7 @@ public class CenterRegistration extends AppCompatActivity {
                                 });
 
                                 //Add Intent here
-                                Intent intent = new Intent(CenterRegistration.this, MainActivity.class);
+                                Intent intent = new Intent(CenterRegistration.this, CenterMain.class);
                                 startActivity(intent);
                                 finish();
                                 loader.dismiss();

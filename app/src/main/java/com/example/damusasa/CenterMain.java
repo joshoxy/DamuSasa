@@ -38,14 +38,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CenterMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView nav_view;
+    private NavigationView nav_center_view;
 
-    private CircleImageView nav_profile_image;
-    private TextView nav_fullname, nav_email, nav_bloodgroup, nav_type;
+    private TextView center_fullname, center_email, center_type, center_location;
     private DatabaseReference userRef;
     private StorageReference storageReference;
 
@@ -58,21 +57,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_center_main);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("DamuLiza");
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        nav_view = findViewById(R.id.nav_view);
+        nav_center_view = findViewById(R.id.nav_center_view);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(CenterMain.this, drawerLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        nav_view.setNavigationItemSelectedListener(this);
+        nav_center_view.setNavigationItemSelectedListener(this);
 
         progressBar = findViewById(R.id.progressBar);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -82,23 +81,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setLayoutManager(layoutManager);
 
         userList = new ArrayList<>();
-        userAdapter = new UserAdapter(MainActivity.this, userList);
+        userAdapter = new UserAdapter(CenterMain.this, userList);
 
         recyclerView.setAdapter(userAdapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference()
+                .child("centers").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String type = snapshot.child("type").getValue().toString();
-                if (type.equals("donor")){
-                    readRecipients();
-                }else {
+                if (type.equals("center")){
                     readDonors();
                 }
-
             }
 
             @Override
@@ -108,56 +104,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        nav_profile_image = nav_view.getHeaderView(0).findViewById(R.id.nav_user_image);
-        nav_fullname = nav_view.getHeaderView(0).findViewById(R.id.nav_user_fullname);
-        nav_email = nav_view.getHeaderView(0).findViewById(R.id.nav_user_email);
-        nav_bloodgroup = nav_view.getHeaderView(0).findViewById(R.id.nav_user_bloodgroup);
-        nav_type = nav_view.getHeaderView(0).findViewById(R.id.nav_user_type);
+        center_fullname = nav_center_view.getHeaderView(0).findViewById(R.id.center_fullname);
+        center_location = nav_center_view.getHeaderView(0).findViewById(R.id.center_location);
+        center_email = nav_center_view.getHeaderView(0).findViewById(R.id.center_email);
+        center_type = nav_center_view.getHeaderView(0).findViewById(R.id.center_type);
 
         //Fetch data from firebase and display it to those views
-        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(
+        userRef = FirebaseDatabase.getInstance().getReference().child("centers").child(
                 FirebaseAuth.getInstance().getCurrentUser().getUid()
         );
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               if (snapshot.exists()){
-                   String name = snapshot.child("name").getValue().toString();  //Get user name from name field in Firebase
-                   nav_fullname.setText(name); //Set the nav_fullname to display name from Firebase
+                if (snapshot.exists()){
+                    String name = snapshot.child("centerName").getValue().toString();  //Get user name from name field in Firebase
+                    center_fullname.setText(name); //Set the center_fullname to display name from Firebase
 
-                   String email = snapshot.child("email").getValue().toString();  //Get email from name field in Firebase
-                   nav_email.setText(email); //Set the nav_email to display name from Firebase
+                    String location = snapshot.child("centerLocation").getValue().toString();
+                    center_location.setText(location);
 
-                   String bloodgroup = snapshot.child("bloodGroup").getValue().toString();
-                   nav_bloodgroup.setText(bloodgroup);
+                    String email = snapshot.child("centerEmail").getValue().toString();
+                    center_email.setText(email);
 
-                   String type = snapshot.child("type").getValue().toString();
-                   nav_type.setText(type);
 
-                   if (snapshot.hasChild("profilepictureurl")){
-                       //Fetch image from firebase using Glider dependency
-                       String imageUrl = snapshot.child("profilepictureurl").getValue().toString();
-                       Glide.with(getApplicationContext()).load(imageUrl).into(nav_profile_image);
-                   }else{
-                       nav_profile_image.setImageResource(R.drawable.profile_image);
-                   }
+                    String type = snapshot.child("type").getValue().toString();
+                    center_type.setText(type);
 
-                   //Change menu based on who is logged in **
-                   Menu nav_menu = nav_view.getMenu();
 
-                   if (type.equals("donor")){
-                       nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
-                       nav_menu.findItem(R.id.notifications).setVisible(true);
-                       nav_menu.findItem(R.id.book).setVisible(true);
-                       nav_menu.findItem(R.id.appointments).setVisible(true);
-                   }
+                    //Change menu based on who is logged in **
+                    Menu nav_menu = nav_center_view.getMenu();
 
-                   if (type.equals("center")){
+                    /*if (type.equals("donor")){
+                        nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
+                        nav_menu.findItem(R.id.notifications).setVisible(true);
+                        nav_menu.findItem(R.id.book).setVisible(true);
+                        nav_menu.findItem(R.id.appointments).setVisible(true);
+                    }*/
 
-                   }
-
-               }
+                }
             }
 
             @Override
@@ -183,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 progressBar.setVisibility(View.GONE);
 
                 if (userList.isEmpty()){
-                    Toast.makeText(MainActivity.this, "No donors found !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CenterMain.this, "No donors found !", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
 
@@ -211,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 progressBar.setVisibility(View.GONE);
 
                 if (userList.isEmpty()){
-                    Toast.makeText(MainActivity.this, "No recipients found !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CenterMain.this, "No recipients found !", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
 
@@ -228,87 +213,72 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.aplus:
-                Intent intent3 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent3 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent3.putExtra("group", "A+");
                 startActivity(intent3);
                 break;
 
             case R.id.aminus:
-                Intent intent4 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent4 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent4.putExtra("group", "A-");
                 startActivity(intent4);
                 break;
 
             case R.id.bplus:
-                Intent intent5 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent5 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent5.putExtra("group", "B+");
                 startActivity(intent5);
                 break;
 
             case R.id.bminus:
-                Intent intent6 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent6 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent6.putExtra("group", "B-");
                 startActivity(intent6);
                 break;
 
             case R.id.abplus:
-                Intent intent7 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent7 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent7.putExtra("group", "AB+");
                 startActivity(intent7);
                 break;
 
             case R.id.abminus:
-                Intent intent8 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent8 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent8.putExtra("group", "AB-");
                 startActivity(intent8);
                 break;
 
             case R.id.oplus:
-                Intent intent9 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent9 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent9.putExtra("group", "O+");
                 startActivity(intent9);
                 break;
 
             case R.id.ominus:
-                Intent intent10 = new Intent(MainActivity.this, CategorySelectedActivity.class);
+                Intent intent10 = new Intent(CenterMain.this, CategorySelectedActivity.class);
                 intent10.putExtra("group", "O-");
                 startActivity(intent10);
                 break;
 
-            case R.id.compatible:
-                Intent intent11 = new Intent(MainActivity.this, CategorySelectedActivity.class);
-                intent11.putExtra("group", "Compatible with you");
-                startActivity(intent11);
-                break;
 
-            case R.id.sentEmail:
-                Intent intent12 = new Intent(MainActivity.this, SentEmailsActivity.class);
+            case R.id.requestCenter:  //Add Intent for Requesting activity
+                Intent intent12 = new Intent(CenterMain.this, SentEmailsActivity.class);
                 startActivity(intent12);
                 break;
 
-            case R.id.notifications:
-                Intent intent13 = new Intent(MainActivity.this, NotificationsActivity.class);
-                startActivity(intent13);
-                break;
-
-            case R.id.book:
-                Intent intent14 = new Intent(MainActivity.this, BookingActivity.class);
-                startActivity(intent14);
-                break;
-
-            case R.id.appointments:
-                Intent intent15 = new Intent(MainActivity.this, Appointments.class);
+            case R.id.center_appointments: //Add Intent for Viewing appointments
+                Intent intent15 = new Intent(CenterMain.this, Appointments.class);
                 startActivity(intent15);
                 break;
 
             case R.id.profile:
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(CenterMain.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent2 = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent2 = new Intent(CenterMain.this, LoginActivity.class);
                 startActivity(intent2);
                 break;
         }
