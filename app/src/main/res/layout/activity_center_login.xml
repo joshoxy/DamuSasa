@@ -34,7 +34,7 @@
                 android:src="@drawable/logo"/>
 
             <TextView
-                android:text="Welcome Back"
+                android:text="Donation Center Login"
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -120,21 +120,6 @@
                 <Button
                     android:id="@+id/loginButton"
                     android:text="Sign In"
-                    android:textAllCaps="false"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
-                    android:height="45dp"
-                    android:background="@drawable/buttons_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/center_loginButton"
-                    android:text="Donation Center Login"
                     android:textAllCaps="false"
                     android:layout_marginTop="10dp"
                     android:gravity="center"

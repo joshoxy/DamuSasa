@@ -23,12 +23,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity {
+public class CenterLogin extends AppCompatActivity {
 
     private TextView backButton;
     private TextInputEditText login_Email, login_pass;
     private TextView forgotPass;
-    private Button loginButton, center_loginButton;
+    private Button loginButton;
     private ProgressDialog loader;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_center_login);
 
         mAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(CenterLogin.this, CenterMain.class);
                     startActivity(intent);
                     finish();
                 }
@@ -57,14 +57,13 @@ public class LoginActivity extends AppCompatActivity {
         login_pass = findViewById(R.id.login_pass);
         forgotPass = findViewById(R.id.forgotPass);
         loginButton = findViewById(R.id.loginButton);
-        center_loginButton = findViewById(R.id.center_loginButton);
         loader = new ProgressDialog(this);
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SelectRegistrationActivity.class);
+                Intent intent = new Intent(CenterLogin.this, SelectRegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,10 +90,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CenterLogin.this, "Log in successful", Toast.LENGTH_SHORT).show();
 
                             }else{
-                                Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CenterLogin.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
 
                             loader.dismiss();
@@ -104,13 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        center_loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CenterLogin.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

@@ -62,7 +62,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("DamuLiza");
 
-        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.center_drawerLayout);
         nav_center_view = findViewById(R.id.nav_center_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(CenterMain.this, drawerLayout,
@@ -126,7 +126,6 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
                     String email = snapshot.child("centerEmail").getValue().toString();
                     center_email.setText(email);
-
 
                     String type = snapshot.child("type").getValue().toString();
                     center_type.setText(type);
@@ -262,8 +261,8 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
 
             case R.id.requestCenter:  //Add Intent for Requesting activity
-                Intent intent12 = new Intent(CenterMain.this, SentEmailsActivity.class);
-                startActivity(intent12);
+                /*Intent intent12 = new Intent(CenterMain.this, SentEmailsActivity.class);
+                startActivity(intent12);*/
                 break;
 
             case R.id.center_appointments: //Add Intent for Viewing appointments
@@ -271,10 +270,6 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent15);
                 break;
 
-            case R.id.profile:
-                Intent intent = new Intent(CenterMain.this, ProfileActivity.class);
-                startActivity(intent);
-                break;
 
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();

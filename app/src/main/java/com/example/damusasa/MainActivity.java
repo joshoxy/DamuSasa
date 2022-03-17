@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String type = snapshot.child("type").getValue().toString();
-                if (type.equals("donor")){
-                    readRecipients();
-                }else {
-                    readDonors();
-                }
+                    String type = snapshot.child("type").getValue().toString();
+                    if (type.equals("donor")) {
+                        readRecipients();
+                    } else {
+                        readDonors();
+                    }
 
             }
 
