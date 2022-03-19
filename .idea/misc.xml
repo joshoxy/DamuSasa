@@ -17,6 +17,7 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/navigation_view_item_selected.xml" value="0.2101851851851852" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/splash_bg.xml" value="0.23703703703703705" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/step_buttons_background.xml" value="0.20555555555555555" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_all_appointments.xml" value="0.24003623188405798" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_appointments.xml" value="0.264" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_booking.xml" value="0.2" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_category_selected.xml" value="0.25416666666666665" />
@@ -32,6 +33,7 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_select_registration.xml" value="0.264" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_sent_emails.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_splash_screen.xml" value="0.1793478260869565" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/appointment_list.xml" value="0.24003623188405798" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/centerHeader.xml" value="0.25" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/centerheader.xml" value="0.24592391304347827" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_one.xml" value="0.25407608695652173" />

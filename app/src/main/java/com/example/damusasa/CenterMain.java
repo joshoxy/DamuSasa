@@ -300,7 +300,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 break;
 
             case R.id.center_appointments: //Add Intent for Viewing appointments
-                Intent intent15 = new Intent(CenterMain.this, Appointments.class);
+                Intent intent15 = new Intent(CenterMain.this, All_Appointments.class);
                 startActivity(intent15);
                 break;
 
