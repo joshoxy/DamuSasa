@@ -53,6 +53,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
     private List<User> userList;
     private UserAdapter userAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
         drawerLayout = findViewById(R.id.center_drawerLayout);
         nav_center_view = findViewById(R.id.nav_center_view);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(CenterMain.this, drawerLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,16 +87,19 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         recyclerView.setAdapter(userAdapter);
 
         DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference()
-                .child("centers").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String type = snapshot.child("type").getValue().toString();
+                //readUsers();
+                readDonors();
+
+                /*String type = snapshot.child("type").getValue().toString();
                 if (type.equals("center")){
                     readDonors();
                     readRecipients();
-                }
+                }*/
             }
 
             @Override
@@ -110,10 +115,9 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         center_type = nav_center_view.getHeaderView(0).findViewById(R.id.center_type);
 
         //Fetch data from firebase and display it to those views
-        userRef = FirebaseDatabase.getInstance().getReference().child("centers").child(
+        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(
                 FirebaseAuth.getInstance().getCurrentUser().getUid()
         );
-
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -206,6 +210,36 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
             }
         });
+    }
+
+    private void readUsers() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    userList.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        User user = dataSnapshot.getValue(User.class);
+                        userList.add(user);
+
+                    }
+                    userAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
+
+                    if (userList.isEmpty()){
+                        Toast.makeText(CenterMain.this, "No users found !", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override

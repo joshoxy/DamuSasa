@@ -118,7 +118,7 @@ public class CenterRegistration extends AppCompatActivity {
                             else{
                                 String currentUserId = mAuth.getCurrentUser().getUid();
                                 userDatabaseRef = FirebaseDatabase.getInstance().getReference()
-                                        .child("centers").child(currentUserId);
+                                        .child("users").child(currentUserId);
 
                                 HashMap userInfo = new HashMap();
                                 userInfo.put("id",currentUserId);

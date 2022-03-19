@@ -50,9 +50,35 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference()
+                            .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                    ref2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String type = snapshot.child("type").getValue().toString();
+
+                            if (type.equals("center")){
+                                Intent intent = new Intent(LoginActivity.this, CenterMain.class);
+                                startActivity(intent);
+                                finish();
+                            } else
+                            {
+                                Intent intent2 = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent2);
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                    /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();*/
 
                 } //end of if
 

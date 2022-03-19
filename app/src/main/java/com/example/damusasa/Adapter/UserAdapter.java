@@ -57,14 +57,31 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         //Filter donors out
         if (user.getType().equals("donor")){
             holder.emailNow.setVisibility(View.VISIBLE);
-        } else if (user.getType().equals("center")){
-            holder.emailNow.setVisibility(View.GONE);
         }
 
         holder.userEmail.setText(user.getEmail());
         holder.phoneNumber.setText(user.getPhoneNumber());
         holder.userName.setText(user.getName());
         holder.bloodGroup.setText(user.getBloodGroup());
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String type = snapshot.child("type").getValue().toString();
+                if (type.equals("center")){
+                    holder.emailNow.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         //Fetch image with glide
         Glide.with(context).load(user.getProfilepictureurl()).into(holder.userProfileImage);
@@ -133,9 +150,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                         .show();
             }
         });
-
-
-
 
 
     }
