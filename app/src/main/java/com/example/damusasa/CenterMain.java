@@ -295,8 +295,8 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
 
             case R.id.requestCenter:  //Add Intent for Requesting activity
-                /*Intent intent12 = new Intent(CenterMain.this, SentEmailsActivity.class);
-                startActivity(intent12);*/
+                Intent intent12 = new Intent(CenterMain.this, RequestDonation.class);
+                startActivity(intent12);
                 break;
 
             case R.id.center_appointments: //Add Intent for Viewing appointments
