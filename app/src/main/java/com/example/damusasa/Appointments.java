@@ -19,6 +19,8 @@ public class Appointments extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView donorName, centerName, centerAddress, Time;
 
+    //Appointments for the user
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

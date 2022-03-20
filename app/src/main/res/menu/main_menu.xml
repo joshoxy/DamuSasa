@@ -16,7 +16,7 @@
         android:id="@+id/appointments"
         android:icon="@drawable/ic_time"
         android:visible="false"
-        android:title="Appointments"/>
+        android:title="My Appointments"/>
 
     <item
         android:id="@+id/sentEmail"
@@ -27,6 +27,11 @@
         android:id="@+id/compatible"
         android:icon="@drawable/compatible"
         android:title="Compatible with you"/>
+
+    <item
+        android:id="@+id/center_requests"
+        android:icon="@drawable/ic_hospital"
+        android:title="Donation Center Requests"/>
 
     <item android:title="Blood Groups">
         <menu>

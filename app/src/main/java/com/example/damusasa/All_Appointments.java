@@ -28,6 +28,8 @@ public class All_Appointments extends AppCompatActivity {
     AppointmentsAdapter myAdapter;
     ArrayList<Appointment_model> list;
 
+    //Appointments for donation center
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

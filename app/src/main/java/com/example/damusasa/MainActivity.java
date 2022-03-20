@@ -301,6 +301,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent15);
                 break;
 
+            case R.id.center_requests:  //Add intent to view all center requests
+                /*Intent intent16 = new Intent(MainActivity.this, Appointments.class);
+                startActivity(intent16);
+                break;*/
+
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);

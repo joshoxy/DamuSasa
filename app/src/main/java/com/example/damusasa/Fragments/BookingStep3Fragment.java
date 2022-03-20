@@ -136,7 +136,6 @@ public class BookingStep3Fragment extends Fragment {
                     userInfo.put("CenterAddress",CenterAddress);
                     userInfo.put("Time",Time);
 
-
                     userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
