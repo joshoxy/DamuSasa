@@ -18,7 +18,6 @@
         android:background="@drawable/gradient_bg"/>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/r_centerRequests"
         android:layout_width="match_parent"

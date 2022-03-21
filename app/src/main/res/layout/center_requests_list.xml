@@ -19,30 +19,6 @@
         android:orientation="vertical">
 
 
-        //Donor Name
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Donor name: "
-                android:textSize="20sp"
-                android:layout_marginLeft="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/all_txt_name"
-                android:text="Donor name"
-                android:textSize="20sp"
-                android:layout_marginLeft="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
         //Center Name
         <LinearLayout
             android:orientation="horizontal"
@@ -58,15 +34,75 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Donation center: "
+                android:text="Center name: "
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/all_txt_center_name"
-                android:text="Donation Center"
+                android:id="@+id/c_name"
+                android:text="Center name"
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        //Type
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_hospital"
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Blood Type: "
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/c_type"
+                android:text="Type"
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        //Location
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_location"
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Location: "
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/c_location"
+                android:text="Location"
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
@@ -95,7 +131,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/all_txt_location"
+                android:id="@+id/c_address"
                 android:text="Address of center"
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
@@ -103,7 +139,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        //Time
+        //Phone
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
@@ -111,27 +147,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--<ImageView
-                android:src="@drawable/ic_time"
+            <ImageView
+                android:src="@drawable/ic_phone"
                 android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>-->
+                android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Time: "
+                android:text="Phone: "
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/all_txt_time"
-                android:text="Time"
+                android:id="@+id/c_phone"
+                android:text="Phone"
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/c_button_request"
+            android:text="Donate"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttons_background"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
