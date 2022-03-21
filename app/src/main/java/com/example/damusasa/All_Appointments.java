@@ -43,7 +43,7 @@ public class All_Appointments extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerAppoint);
 
-        database = FirebaseDatabase.getInstance().getReference().child("appointments");
+        database = FirebaseDatabase.getInstance().getReference("appointments");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -54,7 +54,7 @@ public class All_Appointments extends AppCompatActivity {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
                     list.add(user);
                 }

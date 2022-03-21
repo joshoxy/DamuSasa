@@ -302,9 +302,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.center_requests:  //Add intent to view all center requests
-                /*Intent intent16 = new Intent(MainActivity.this, Appointments.class);
+                Intent intent16 = new Intent(MainActivity.this, CenterRequests.class);
                 startActivity(intent16);
-                break;*/
+                break;
 
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);

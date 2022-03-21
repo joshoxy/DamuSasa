@@ -34,9 +34,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Appointment_model user = list.get(position);
-        holder.donorName.setText(user.getDonor_name());
-        holder.centerName.setText(user.getDonation_center());
-        holder.centerAddress.setText(user.getAddress());
+        holder.donorName.setText(user.getCustomerName());
+        holder.centerName.setText(user.getCenterName());
+        holder.centerAddress.setText(user.getCenterAddress());
         holder.Time.setText(user.getTime());
 
     }
@@ -51,10 +51,10 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            donorName = itemView.findViewById(R.id.txt_name);
-            centerName = itemView.findViewById(R.id.txt_center_name);
-            centerAddress = itemView.findViewById(R.id.txt_location);
-            Time = itemView.findViewById(R.id.txt_time);
+            donorName = itemView.findViewById(R.id.all_txt_name);
+            centerName = itemView.findViewById(R.id.all_txt_center_name);
+            centerAddress = itemView.findViewById(R.id.all_txt_location);
+            Time = itemView.findViewById(R.id.all_txt_time);
         }
     }
 }

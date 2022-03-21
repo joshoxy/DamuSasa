@@ -24,6 +24,7 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_center_login.xml" value="0.24592391304347827" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_center_main.xml" value="0.25" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_center_registration.xml" value="0.25407608695652173" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_center_requests.xml" value="0.22644927536231885" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_donor_registration.xml" value="0.2" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
@@ -36,6 +37,7 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_splash_screen.xml" value="0.1793478260869565" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/appointment_list.xml" value="0.24003623188405798" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/centerHeader.xml" value="0.25" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/center_requests_list.xml" value="0.22644927536231885" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/centerheader.xml" value="0.24592391304347827" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_one.xml" value="0.25407608695652173" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/fragment_booking_step_three.xml" value="0.25407608695652173" />
