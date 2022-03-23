@@ -64,6 +64,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.userName.setText(user.getName());
         holder.bloodGroup.setText(user.getBloodGroup());
 
+        //Hide button
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
