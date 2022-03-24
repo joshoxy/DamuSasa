@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".Accepted_requests"
+            android:exported="false" />
+        <activity
             android:name=".CenterRequests"
             android:exported="false" />
         <activity

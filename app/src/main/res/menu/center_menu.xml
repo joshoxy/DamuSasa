@@ -7,14 +7,19 @@
         android:title="Home"/>
 
     <item
+        android:id="@+id/center_appointments"
+        android:icon="@drawable/ic_time"
+        android:title="Appointments"/>
+
+    <item
         android:id="@+id/requestCenter"
         android:icon="@drawable/ic_hospital"
         android:title="Request donation"/>
 
     <item
-        android:id="@+id/center_appointments"
-        android:icon="@drawable/ic_time"
-        android:title="Appointments"/>
+        android:id="@+id/accepted_requests"
+        android:icon="@drawable/ic_baseline_accept"
+        android:title="Accepted requests"/>
 
     <item android:title="Blood Groups">
         <menu>

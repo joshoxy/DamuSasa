@@ -304,6 +304,10 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent15);
                 break;
 
+            case R.id.accepted_requests: //Add Intent for Viewing accepted requests
+                Intent intent16 = new Intent(CenterMain.this, Accepted_requests.class);
+                startActivity(intent16);
+                break;
 
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".All_Appointments">
+    tools:context=".Accepted_requests">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
         android:background="@drawable/gradient_bg"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerAppoint"
+        android:id="@+id/recycler_accepted"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

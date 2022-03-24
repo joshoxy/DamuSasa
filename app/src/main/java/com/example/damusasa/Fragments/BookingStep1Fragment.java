@@ -22,6 +22,13 @@ import com.example.damusasa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -90,6 +97,7 @@ IBranchLoadListener iBranchLoadListener;
         recycler_centers.addItemDecoration(new SpacesItemDecoration(4));
     }
 
+    //Original LoadAllCenters  (expand)
     private void loadAllCenters() {
         Centers.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -111,6 +119,7 @@ IBranchLoadListener iBranchLoadListener;
         });
     }
 
+
     @Override
     public void onAllCentersLoadSuccess(List<String> areaNameList) {
         spinner.setItems(areaNameList);
@@ -126,6 +135,7 @@ IBranchLoadListener iBranchLoadListener;
 
     }
 
+    //Original loadBranch
     private void loadBranchofCity(String cityName) {
         dialog.show();
         branchRef = FirebaseFirestore.getInstance()
@@ -155,6 +165,8 @@ IBranchLoadListener iBranchLoadListener;
         });
 
     }
+    //end of load branch
+
 
     @Override
     public void onAllCenterLoadFailed(String message) {
@@ -162,6 +174,7 @@ IBranchLoadListener iBranchLoadListener;
 
     }
 
+    //Original on branchLoadSuccess
     @Override
     public void onBranchLoadSuccess(List<Branch> branchList) {
         MyBranchAdapter adapter = new MyBranchAdapter(getActivity(), branchList);
@@ -170,6 +183,8 @@ IBranchLoadListener iBranchLoadListener;
         dialog.dismiss();
 
     }
+
+
 
     @Override
     public void onBranchLoadFailed(String message) {
