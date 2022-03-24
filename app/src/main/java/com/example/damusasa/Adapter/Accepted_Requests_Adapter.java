@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,18 +32,30 @@ public class Accepted_Requests_Adapter extends RecyclerView.Adapter<Accepted_Req
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Accepted_Requests_Model requests_model = list.get(position);
+        holder.txt_name.setText(requests_model.getDonor_name());
+        holder.txt_type.setText(requests_model.getDonor_blood());
+        holder.txt_phone.setText(requests_model.getDonor_phone());
+        holder.txt_center.setText(requests_model.getCenter_name());
+        holder.txt_date.setText(requests_model.getDate());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView txt_name, txt_type, txt_phone, txt_center, txt_date;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            txt_name = itemView.findViewById(R.id.txt_name);
+            txt_type = itemView.findViewById(R.id.txt_type);
+            txt_phone = itemView.findViewById(R.id.txt_phone);
+            txt_center = itemView.findViewById(R.id.txt_center);
+            txt_date = itemView.findViewById(R.id.txt_date);
         }
     }
 }
