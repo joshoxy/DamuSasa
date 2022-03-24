@@ -48,8 +48,9 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="20dp">
 
-                //Center Name
+                <!--//Center Name
                 <com.google.android.material.textfield.TextInputLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/TextInputLayoutStyle"
@@ -70,7 +71,7 @@
                         android:drawableStart="@drawable/ic_person"/>
 
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <Spinner
                     android:gravity="center"
@@ -84,7 +85,7 @@
                     android:entries="@array/bloodgroups"
                     android:layout_height="wrap_content"/>
 
-                //Location
+               <!-- //Location
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,7 +156,7 @@
                         android:drawableStart="@drawable/ic_phone"/>
 
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <Button
                     android:id="@+id/requestButton"
