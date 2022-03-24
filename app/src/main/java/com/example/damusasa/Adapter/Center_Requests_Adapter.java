@@ -78,21 +78,6 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                         month = month+1;
                                         String date = makeDateString(dayOfMonth, month, year);
-
-                                    }
-                                };
-                                Calendar calendar = Calendar.getInstance();
-                                int year = calendar.get(Calendar.YEAR);
-                                int month = calendar.get(Calendar.MONTH);
-                                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                                int style = AlertDialog.THEME_HOLO_LIGHT;
-
-                                holder.datePickerDialog = new DatePickerDialog(((Activity)context), style, dateSetListener, year, month, day);
-                                holder.datePickerDialog.setTitle("Pick a date");
-                                holder.datePickerDialog.setCancelable(false);
-                                holder.datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
                                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                                                 .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         reference.addValueEventListener(new ValueEventListener() {
@@ -112,6 +97,8 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                                 userInfo.put("center_name",center_name);
                                                 userInfo.put("location",location);
                                                 userInfo.put("address",address);
+                                                userInfo.put("date",date);
+
 
                                                 reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                                                     @Override
@@ -136,14 +123,18 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                         });
                                         //End of save to db
 
-                                        //Next thing is to add String to pick the date lol
-
                                     }
-                                });
+                                };
+                                Calendar calendar = Calendar.getInstance();
+                                int year = calendar.get(Calendar.YEAR);
+                                int month = calendar.get(Calendar.MONTH);
+                                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                int style = AlertDialog.THEME_HOLO_LIGHT;
+
+                                holder.datePickerDialog = new DatePickerDialog(((Activity)context), style, dateSetListener, year, month, day);
+                                holder.datePickerDialog.setTitle("Pick a date");
+                                holder.datePickerDialog.setCancelable(false);
                                 holder.datePickerDialog.show();
-
-
-
                             }
                         })
                         .setNegativeButton("No", null)
