@@ -13,10 +13,12 @@ import com.example.damusasa.Adapter.Accepted_Requests_Adapter;
 import com.example.damusasa.Model.Accepted_Requests_Model;
 import com.example.damusasa.Model.Appointment_model;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -65,6 +67,7 @@ public class Accepted_requests extends AppCompatActivity {
 
             }
         });
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -39,12 +40,11 @@ public class Accepted_Requests_Adapter extends RecyclerView.Adapter<Accepted_Req
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Accepted_Requests_Model requests_model = list.get(position);
-        holder.txt_name.setText(requests_model.getDonor_name());
-        holder.txt_type.setText(requests_model.getDonor_blood());
-        holder.txt_phone.setText(requests_model.getDonor_phone());
-        holder.txt_center.setText(requests_model.getCenter_name());
-        holder.txt_date.setText(requests_model.getDate());
-
+                holder.txt_name.setText(requests_model.getDonor_name());
+                holder.txt_type.setText(requests_model.getDonor_blood());
+                holder.txt_phone.setText(requests_model.getDonor_phone());
+                holder.txt_center.setText(requests_model.getCenter_name());
+                holder.txt_date.setText(requests_model.getDate());
     }
 
     @Override
@@ -62,6 +62,7 @@ public class Accepted_Requests_Adapter extends RecyclerView.Adapter<Accepted_Req
             txt_phone = itemView.findViewById(R.id.txt_phone);
             txt_center = itemView.findViewById(R.id.txt_center);
             txt_date = itemView.findViewById(R.id.txt_date);
+
         }
     }
 }

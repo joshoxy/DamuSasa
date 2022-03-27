@@ -4,9 +4,8 @@
     xmlns:app="http://schemas.android.com/tools"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     app:cardBackgroundColor="@color/white"
-    app:cardMaxElevation="12dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:orientation="vertical">
-
 
         //Center Name
         <LinearLayout
