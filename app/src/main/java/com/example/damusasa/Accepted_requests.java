@@ -51,7 +51,42 @@ public class Accepted_requests extends AppCompatActivity {
         myAdapter = new Accepted_Requests_Adapter(this,list);
         recyclerView.setAdapter(myAdapter);
 
-        database.addValueEventListener(new ValueEventListener() {
+        //Query to display only the appointments of the specific center
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String center_name = snapshot.child("centerName").getValue().toString();
+                Query query = database.orderByChild("center_name").equalTo(center_name);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            Accepted_Requests_Model requests_model = dataSnapshot.getValue(Accepted_Requests_Model.class);
+                            list.add(requests_model);
+                        }
+                        myAdapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+        /*database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -66,7 +101,7 @@ public class Accepted_requests extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
     @Override
