@@ -39,7 +39,7 @@ public class JavaMailApi extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please wait...");
-        progressDialog.setTitle("Sending email");
+        progressDialog.setTitle("Sending request");
         progressDialog.show();
         super.onPreExecute();
     }

@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email sent successfully!"
+        android:text="Request sent successfully!"
         android:textColor="#000"
         android:layout_margin="10dp"
         android:textStyle="bold"

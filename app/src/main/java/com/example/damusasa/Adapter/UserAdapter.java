@@ -95,8 +95,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(context)
-                        .setTitle("SEND EMAIL")
-                        .setMessage("Send email to "+user.getEmail() + "?")
+                        .setTitle("Confirm")
+                        .setMessage("Request donation from "+user.getName() + "?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -122,7 +122,33 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                         JavaMailApi javaMailApi = new JavaMailApi(context, mEmail, mSubject, mMessage);
                                         javaMailApi.execute();
 
-                                        DatabaseReference senderRef = FirebaseDatabase.getInstance().getReference("emails")
+                                        //Add the request to the database
+                                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                                                .child("recipient_requests").push();
+                                        reference1.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                String donor_name = user.getName();
+                                                String donor_type = user.getBloodGroup();
+                                                HashMap userInfo = new HashMap();
+                                                userInfo.put("recipient_name", nameOfSender);
+                                                userInfo.put("recipient_blood", blood);
+                                                userInfo.put("recipient_phone", phone);
+                                                userInfo.put("recipient_email", email);
+                                                userInfo.put("donor_name", donor_name);
+                                                userInfo.put("donor_blood_type", donor_type);
+
+                                                reference1.updateChildren(userInfo);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                        /*DatabaseReference senderRef = FirebaseDatabase.getInstance().getReference("emails")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         senderRef.child(idOfTheReceiver).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -137,7 +163,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                                 }
 
                                             }
-                                        });
+                                        });*/
                                     }
 
                                     @Override
@@ -179,6 +205,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             emailNow = itemView.findViewById(R.id.emailNow);
         }
     }
+
     private void addNotifications(String receiverId, String senderId){
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference().child("notifications").child(receiverId);
