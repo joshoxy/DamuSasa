@@ -36,7 +36,6 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
         holder.r_name.setText(requestsModel.getRecipient_name());
         holder.r_type.setText(requestsModel.getRecipient_blood());
         holder.r_phone.setText(requestsModel.getRecipient_phone());
-
     }
 
     @Override

@@ -67,6 +67,7 @@ public class SentEmailsActivity extends AppCompatActivity {
                             Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
                             list.add(model);
                         }
+                        recipient_requests_adapter.notifyDataSetChanged();
                     }
 
                     @Override
