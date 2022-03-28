@@ -9,13 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.damusasa.Adapter.Recipient_Requests_Adapter;
 import com.example.damusasa.Adapter.UserAdapter;
+import com.example.damusasa.Model.Recipient_Requests_Model;
 import com.example.damusasa.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,10 +28,9 @@ public class SentEmailsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-
-    List<String> idList;
-    List<User> userList;
-    UserAdapter userAdapter;
+    DatabaseReference database;
+    Recipient_Requests_Adapter recipient_requests_adapter;
+    ArrayList<Recipient_Requests_Model> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,58 +44,36 @@ public class SentEmailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView = findViewById(R.id.request_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        database = FirebaseDatabase.getInstance().getReference("recipient_requests");
 
-        userList = new ArrayList<>();
-        userAdapter = new UserAdapter(SentEmailsActivity.this, userList);
-        recyclerView.setAdapter(userAdapter);
+        list = new ArrayList<>();
+        recipient_requests_adapter = new Recipient_Requests_Adapter(this, list);
+        recyclerView.setAdapter(recipient_requests_adapter);
 
-        idList = new ArrayList<>();
-        getIdOfUsers();
-    }
-
-    private void getIdOfUsers() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("emails")
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                idList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    idList.add(dataSnapshot.getKey());
-                }
-                showUsers();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void showUsers() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    User user = dataSnapshot.getValue(User.class);
-
-                    for (String id : idList){
-                        if (user.getIdNumber().equals(id)){
-                            userList.add(user);
+                String donor_name = snapshot.child("name").getValue().toString();
+                Query query = database.orderByChild("donor_name").equalTo(donor_name);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
+                            list.add(model);
                         }
                     }
-                }
-                userAdapter.notifyDataSetChanged();
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
@@ -101,6 +81,8 @@ public class SentEmailsActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     @Override
