@@ -73,7 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String type = snapshot.child("type").getValue().toString();
                 if (type.equals("center")){
-                    holder.emailNow.setVisibility(View.INVISIBLE);
+                    holder.emailNow.setVisibility(View.GONE);
                 }
             }
 
@@ -130,6 +130,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String donor_name = user.getName();
                                                 String donor_type = user.getBloodGroup();
+                                                String donor_phone = user.getPhoneNumber();
                                                 HashMap userInfo = new HashMap();
                                                 userInfo.put("recipient_name", nameOfSender);
                                                 userInfo.put("recipient_blood", blood);
@@ -137,6 +138,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                                 userInfo.put("recipient_email", email);
                                                 userInfo.put("donor_name", donor_name);
                                                 userInfo.put("donor_blood_type", donor_type);
+                                                userInfo.put("donor_phone", donor_phone);
+                                                userInfo.put("status", "Pending");
 
                                                 reference1.updateChildren(userInfo);
 

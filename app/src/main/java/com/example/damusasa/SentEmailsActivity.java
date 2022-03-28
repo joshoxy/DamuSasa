@@ -40,7 +40,7 @@ public class SentEmailsActivity extends AppCompatActivity {
         //Code to show toolbar title on top
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Requests");
+        /*getSupportActionBar().setTitle("Requests");*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -59,7 +59,55 @@ public class SentEmailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String donor_name = snapshot.child("name").getValue().toString();
-                Query query = database.orderByChild("donor_name").equalTo(donor_name);
+                String type = snapshot.child("type").getValue().toString();
+
+                //If donor, run query to show recipient requests
+                if (type.equals("donor")){
+                    getSupportActionBar().setTitle("Received Requests");
+                    //Query for donor logged in
+                    Query query = database.orderByChild("donor_name").equalTo(donor_name);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
+                                list.add(model);
+                            }
+                            recipient_requests_adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+                //If recipient run query to show donor details
+                else{
+                    getSupportActionBar().setTitle("Sent Requests");
+                    //Query for recipient logged in
+                    Query query = database.orderByChild("recipient_name").equalTo(donor_name);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
+                                list.add(model);
+                            }
+                            recipient_requests_adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+
+                //Query for donor logged in
+                /*Query query = database.orderByChild("donor_name").equalTo(donor_name);
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,7 +122,7 @@ public class SentEmailsActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
 
             @Override
