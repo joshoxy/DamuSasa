@@ -114,10 +114,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                         String mEmail = user.getEmail();
                                         String mSubject = "New blood donation request";
                                         String mMessage = "Hello "+ nameOfTheReceiver+", "+nameOfSender+ " of blood group "+blood+
-                                                " has requested a donation. Kindly reach out to them in the following ways:\n"
+                                                " has requested a donation. You can reach out to them in the following ways:\n"
                                                 +"Phone number: "+phone+ "\n"+
                                                         "Email: " +email+ "\n"+
-                                            "Your help would be greatly appreciated !";
+                                            "Your help would be highly appreciated !";
 
                                         JavaMailApi javaMailApi = new JavaMailApi(context, mEmail, mSubject, mMessage);
                                         javaMailApi.execute();

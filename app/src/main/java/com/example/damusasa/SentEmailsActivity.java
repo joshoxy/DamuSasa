@@ -63,7 +63,7 @@ public class SentEmailsActivity extends AppCompatActivity {
 
                 //If donor, run query to show recipient requests
                 if (type.equals("donor")){
-                    getSupportActionBar().setTitle("Received Requests");
+                    getSupportActionBar().setTitle("Received requests");
                     //Query for donor logged in
                     Query query = database.orderByChild("donor_name").equalTo(donor_name);
                     query.addValueEventListener(new ValueEventListener() {
@@ -85,7 +85,7 @@ public class SentEmailsActivity extends AppCompatActivity {
                 }
                 //If recipient run query to show donor details
                 else{
-                    getSupportActionBar().setTitle("Sent Requests");
+                    getSupportActionBar().setTitle("Sent requests");
                     //Query for recipient logged in
                     Query query = database.orderByChild("recipient_name").equalTo(donor_name);
                     query.addValueEventListener(new ValueEventListener() {
