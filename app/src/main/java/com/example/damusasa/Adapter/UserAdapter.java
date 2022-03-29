@@ -110,6 +110,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                         String email = snapshot.child("email").getValue().toString();
                                         String phone = snapshot.child("phoneNumber").getValue().toString();
                                         String blood = snapshot.child("bloodGroup").getValue().toString();
+                                        String id = snapshot.child("id").getValue().toString();
+
 
                                         String mEmail = user.getEmail();
                                         String mSubject = "New blood donation request";
@@ -131,14 +133,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                                                 String donor_name = user.getName();
                                                 String donor_type = user.getBloodGroup();
                                                 String donor_phone = user.getPhoneNumber();
+                                                String ref_id = snapshot.getKey();
                                                 HashMap userInfo = new HashMap();
                                                 userInfo.put("recipient_name", nameOfSender);
                                                 userInfo.put("recipient_blood", blood);
                                                 userInfo.put("recipient_phone", phone);
                                                 userInfo.put("recipient_email", email);
+                                                userInfo.put("recipient_id", id);
                                                 userInfo.put("donor_name", donor_name);
                                                 userInfo.put("donor_blood_type", donor_type);
                                                 userInfo.put("donor_phone", donor_phone);
+                                                userInfo.put("donor_id", idOfTheReceiver);
+                                                userInfo.put("ref_id", ref_id);
                                                 userInfo.put("status", "Pending");
 
                                                 reference1.updateChildren(userInfo);

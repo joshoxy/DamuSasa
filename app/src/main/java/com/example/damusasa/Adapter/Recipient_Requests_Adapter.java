@@ -111,10 +111,12 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                 reference1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String ref_id = snapshot.child("ref_id").getValue().toString();
+
                         HashMap userInfo = new HashMap();
                         userInfo.put("status", "Approved");
 
-                        reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                        reference1.child(ref_id).updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show();
