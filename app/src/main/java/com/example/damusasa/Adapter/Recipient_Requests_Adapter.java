@@ -1,17 +1,24 @@
 package com.example.damusasa.Adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.damusasa.Model.Recipient_Requests_Model;
 import com.example.damusasa.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_Requests_Adapter.MyViewHolder>{
     Context context;
@@ -51,6 +59,28 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_type.setText(requestsModel.getRecipient_blood());
                     holder.r_phone.setText(requestsModel.getRecipient_phone());
                     holder.r_status.setText(requestsModel.getStatus());
+
+                    //Hide button if request has been approved
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                            .child("recipient_requests");
+                    ref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String status = snapshot.getValue().toString();
+                            if (status.equals("Approved")){
+                                holder.r_button_accept.setVisibility(View.GONE);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                 }
                 //What the recipient is supposed to see
                 else {
@@ -62,11 +92,63 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
 
                 }
 
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        //Set on click listener for accept request
+        holder.r_button_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                        .child("recipient_requests");
+                reference1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap userInfo = new HashMap();
+                        userInfo.put("status", "Approved");
+
+                        reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show();
+                                ((Activity)context).finish();
+                                holder.r_button_accept.setVisibility(View.GONE);
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                /*new AlertDialog.Builder(context)
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });*/
             }
         });
 
