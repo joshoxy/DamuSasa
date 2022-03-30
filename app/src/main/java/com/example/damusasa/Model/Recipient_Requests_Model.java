@@ -1,7 +1,7 @@
 package com.example.damusasa.Model;
 
 public class Recipient_Requests_Model {
-    String recipient_name, recipient_blood, recipient_phone, recipient_email, donor_name, donor_blood_type, donor_phone, status;
+    String recipient_name, recipient_blood, recipient_phone, recipient_email, donor_name, donor_blood_type, donor_phone, status, ref_id;
 
     public String getRecipient_name() {
         return recipient_name;
@@ -33,5 +33,9 @@ public class Recipient_Requests_Model {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getRef_id() {
+        return ref_id;
     }
 }

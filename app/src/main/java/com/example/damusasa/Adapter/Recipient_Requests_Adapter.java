@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -61,24 +62,10 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_status.setText(requestsModel.getStatus());
 
                     //Hide button if request has been approved
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                            .child("recipient_requests");
-                    ref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String status = snapshot.getValue().toString();
-                            if (status.equals("Approved")){
-                                holder.r_button_accept.setVisibility(View.GONE);
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    String status = requestsModel.getStatus();
+                    if (status.equals("Approved")){
+                        holder.r_button_accept.setVisibility(View.GONE);
+                    }
 
 
                 }
@@ -111,18 +98,15 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                 reference1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String ref_id = snapshot.child("ref_id").getValue().toString();
-
+                        String ref_id = requestsModel.getRef_id();
                         HashMap userInfo = new HashMap();
                         userInfo.put("status", "Approved");
-
                         reference1.child(ref_id).updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show();
                                 ((Activity)context).finish();
                                 holder.r_button_accept.setVisibility(View.GONE);
-
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -131,7 +115,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
 
                             }
                         });
-
+                        //end of update
 
                     }
 
