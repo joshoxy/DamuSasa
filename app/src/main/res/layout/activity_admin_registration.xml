@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="@drawable/gradient_bg"
-    tools:context=".LoginActivity">
+    tools:context=".RecipientRegistrationActivity">
 
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,7 +34,7 @@
                 android:src="@drawable/logo"/>
 
             <TextView
-                android:text="Welcome Back"
+                android:text="Admin Registration"
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -59,17 +59,67 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="20dp">
 
-
+                //Name
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/TextInputLayoutStyle"
+                    android:layout_marginTop="10dp"
                     app:boxStrokeColor="#000"
                     app:hintTextAppearance="@drawable/gradient_bg"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/login_Email"
+                        android:id="@+id/reg_adminName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Full Name"
+                        android:drawablePadding="10dp"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:textColorHint="#000"
+                        android:drawableStart="@drawable/ic_person"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                //Phone
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextInputLayoutStyle"
+                    android:layout_marginTop="10dp"
+                    app:boxStrokeColor="#000"
+                    app:hintTextAppearance="@drawable/gradient_bg"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/reg_adminPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Phone Number"
+                        android:inputType="number"
+                        android:drawablePadding="10dp"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:textColorHint="#000"
+                        android:drawableStart="@drawable/ic_phone"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                //Email
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextInputLayoutStyle"
+                    android:layout_marginTop="10dp"
+                    app:boxStrokeColor="#000"
+                    app:hintTextAppearance="@drawable/gradient_bg"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/reg_adminEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Email Address"
@@ -83,17 +133,18 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                //Password
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:theme="@style/TextInputLayoutStyle"
                     app:boxStrokeColor="#000"
-                    android:layout_marginTop="15dp"
                     app:hintTextAppearance="@drawable/gradient_bg"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/login_pass"
+                        android:id="@+id/reg_adminPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Password"
@@ -107,36 +158,11 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/forgotPass"
-                    android:text="Forgot Password"
-                    android:textColor="#000"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <Button
-                    android:id="@+id/loginButton"
-                    android:text="Sign In"
+                    android:id="@+id/registerButton"
+                    android:text="Sign Up"
                     android:textAllCaps="false"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
-                    android:height="45dp"
-                    android:background="@drawable/buttons_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/admin_loginButton"
-                    android:text="Admin Login"
-                    android:textAllCaps="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="#fff"
@@ -149,8 +175,8 @@
 
                 <TextView
                     android:id="@+id/backButton"
-                    android:text="Don't have an account? Sign up"
-                    android:layout_marginTop="15dp"
+                    android:text="Have an account? Sign in"
+                    android:layout_marginTop="10dp"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -159,13 +185,10 @@
                     android:layout_height="wrap_content"/>
 
 
-
-
             </LinearLayout>
 
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 
 </ScrollView>

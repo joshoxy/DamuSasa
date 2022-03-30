@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class SelectRegistrationActivity extends AppCompatActivity {
 
-    private Button donorButton, recipientButton, centerButton;
+    private Button donorButton, recipientButton, centerButton, adminButton;
     private TextView backButton;
 
     @Override
@@ -22,6 +22,8 @@ public class SelectRegistrationActivity extends AppCompatActivity {
         recipientButton = findViewById(R.id.recipientButton);
         centerButton = findViewById(R.id.centerButton);
         backButton = findViewById(R.id.backButton);
+        adminButton = findViewById(R.id.adminButton);
+
 
         donorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +45,14 @@ public class SelectRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectRegistrationActivity.this, CenterRegistration.class);
+                startActivity(intent);
+            }
+        });
+
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectRegistrationActivity.this, AdminRegistration.class);
                 startActivity(intent);
             }
         });

@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView backButton;
     private TextInputEditText login_Email, login_pass;
     private TextView forgotPass;
-    private Button loginButton, center_loginButton;
+    private Button loginButton, admin_loginButton;
     private ProgressDialog loader;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -62,7 +62,14 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, CenterMain.class);
                                 startActivity(intent);
                                 finish();
-                            } else
+                            }
+                            else if (type.equals("Admin")){
+                                Intent intent3 = new Intent(LoginActivity.this, AdminPage.class);
+                                startActivity(intent3);
+                                finish();
+                            }
+
+                            else
                             {
                                 Intent intent2 = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent2);
@@ -91,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         login_pass = findViewById(R.id.login_pass);
         forgotPass = findViewById(R.id.forgotPass);
         loginButton = findViewById(R.id.loginButton);
-        center_loginButton = findViewById(R.id.center_loginButton);
+        admin_loginButton = findViewById(R.id.admin_loginButton);
         loader = new ProgressDialog(this);
 
 
@@ -138,10 +145,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        center_loginButton.setOnClickListener(new View.OnClickListener() {
+        admin_loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CenterLogin.class);
+            public void onClick(View v) { //Set intent to open admin page
+                Intent intent = new Intent(LoginActivity.this, AdminPage.class);
                 startActivity(intent);
             }
         });
