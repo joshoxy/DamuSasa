@@ -85,29 +85,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         userAdapter = new UserAdapter(CenterMain.this, userList);
 
         recyclerView.setAdapter(userAdapter);
-
-        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-        ref2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //readUsers();
-                readDonors();
-
-                /*String type = snapshot.child("type").getValue().toString();
-                if (type.equals("center")){
-                    readDonors();
-                    readRecipients();
-                }*/
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        readUsers();
 
         center_fullname = nav_center_view.getHeaderView(0).findViewById(R.id.center_fullname);
         center_location = nav_center_view.getHeaderView(0).findViewById(R.id.center_location);
@@ -217,20 +195,61 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    userList.clear();
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        User user = dataSnapshot.getValue(User.class);
-                        userList.add(user);
+                Query query = reference.orderByChild("type").equalTo("donor");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        userList.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            User user = dataSnapshot.getValue(User.class);
+                            userList.add(user);
+                        }
 
-                    }
-                    userAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
+                        Query query1 = reference.orderByChild("type").equalTo("recipient");
+                        query1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                userList.clear();
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    User user = dataSnapshot.getValue(User.class);
+                                    userList.add(user);
+                                }
 
-                    if (userList.isEmpty()){
-                        Toast.makeText(CenterMain.this, "No users found !", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        userAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
+
+                        if (userList.isEmpty()){
+                            Toast.makeText(CenterMain.this, "No users found !", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
                     }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                /*userList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+
+                if (userList.isEmpty()){
+                    Toast.makeText(AdminPage.this, "No users found !", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }*/
 
             }
 
@@ -239,7 +258,6 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
 
             }
         });
-
     }
 
     @Override

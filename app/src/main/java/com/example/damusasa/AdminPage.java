@@ -45,7 +45,7 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
     private NavigationView nav_view;
 
     private CircleImageView nav_profile_image;
-    private TextView nav_fullname, nav_email, nav_bloodgroup, nav_type;
+    private TextView admin_fullname, admin_email, nav_bloodgroup, admin_type;
     private DatabaseReference userRef;
     private StorageReference storageReference;
 
@@ -60,12 +60,12 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.admin_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("DamuLiza admin");
 
-        drawerLayout = findViewById(R.id.drawerLayout);
-        nav_view = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.admin_drawerLayout);
+        nav_view = findViewById(R.id.nav_admin_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(AdminPage.this, drawerLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,11 +74,11 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
 
         nav_view.setNavigationItemSelectedListener(this);
 
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.admin_progressBar);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.admin_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
 
         userList = new ArrayList<>();
@@ -106,43 +106,47 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
 
             }
         });*/
+
         readUsers();
 
-        nav_profile_image = nav_view.getHeaderView(0).findViewById(R.id.nav_user_image);
-        nav_fullname = nav_view.getHeaderView(0).findViewById(R.id.nav_user_fullname);
-        nav_email = nav_view.getHeaderView(0).findViewById(R.id.nav_user_email);
-        nav_bloodgroup = nav_view.getHeaderView(0).findViewById(R.id.nav_user_bloodgroup);
-        nav_type = nav_view.getHeaderView(0).findViewById(R.id.nav_user_type);
+        admin_fullname = nav_view.getHeaderView(0).findViewById(R.id.admin_fullname);
+        admin_email = nav_view.getHeaderView(0).findViewById(R.id.admin_email);
+        admin_type = nav_view.getHeaderView(0).findViewById(R.id.admin_type);
 
         //Fetch data from firebase and display it to those views
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child(
-                FirebaseAuth.getInstance().getCurrentUser().getUid()
-        );
+                FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    String name = snapshot.child("name").getValue().toString();  //Get user name from name field in Firebase
-                    nav_fullname.setText(name); //Set the nav_fullname to display name from Firebase
+                    String name = snapshot.child("adminName").getValue().toString();  //Get user name from name field in Firebase
+                    admin_fullname.setText(name); //Set the nav_fullname to display name from Firebase
 
-                    String email = snapshot.child("email").getValue().toString();  //Get email from name field in Firebase
-                    nav_email.setText(email); //Set the nav_email to display name from Firebase
+                    String email = snapshot.child("adminEmail").getValue().toString();  //Get email from name field in Firebase
+                    admin_email.setText(email); //Set the nav_email to display name from Firebase
 
                     String type = snapshot.child("type").getValue().toString();
-                    nav_type.setText(type);
+                    admin_type.setText(type);
 
-                    if (snapshot.hasChild("profilepictureurl")){
+                    /*if (snapshot.hasChild("profilepictureurl")){
                         //Fetch image from firebase using Glider dependency
                         String imageUrl = snapshot.child("profilepictureurl").getValue().toString();
                         Glide.with(getApplicationContext()).load(imageUrl).into(nav_profile_image);
                     }else{
                         nav_profile_image.setImageResource(R.drawable.profile_image);
-                    }
+                    }*/
 
                     //Change menu based on who is logged in **
                     Menu nav_menu = nav_view.getMenu();
 
+                }
+                else {
+                    Toast.makeText(AdminPage.this, "Snapshot does not exists", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AdminPage.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
 
@@ -159,7 +163,50 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList.clear();
+                Query query = reference.orderByChild("type").equalTo("donor");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        userList.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            User user = dataSnapshot.getValue(User.class);
+                            userList.add(user);
+                        }
+
+                        Query query1 = reference.orderByChild("type").equalTo("recipient");
+                        query1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                userList.clear();
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    User user = dataSnapshot.getValue(User.class);
+                                    userList.add(user);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        userAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+
+                        if (userList.isEmpty()){
+                            Toast.makeText(AdminPage.this, "No users found !", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                /*userList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
@@ -170,7 +217,8 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 if (userList.isEmpty()){
                     Toast.makeText(AdminPage.this, "No users found !", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
-                }
+                }*/
+
             }
 
             @Override

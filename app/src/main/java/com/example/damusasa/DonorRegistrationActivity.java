@@ -146,6 +146,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                             if (!task.isSuccessful()){
                                 String error = task.getException().toString();
                                 Toast.makeText(DonorRegistrationActivity.this, "Error " + error, Toast.LENGTH_SHORT).show();
+                                loader.dismiss();
                             }
                             else{
                                 String currentUserId = mAuth.getCurrentUser().getUid();

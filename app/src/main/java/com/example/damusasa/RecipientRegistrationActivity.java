@@ -131,6 +131,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity {
                             if (!task.isSuccessful()){
                                 String error = task.getException().toString();
                                 Toast.makeText(RecipientRegistrationActivity.this, "Error" + error, Toast.LENGTH_SHORT).show();
+                                loader.dismiss();
                             }
                             else{
                                 String currentUserId = mAuth.getCurrentUser().getUid();

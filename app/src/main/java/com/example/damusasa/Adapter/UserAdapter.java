@@ -75,6 +75,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 if (type.equals("center")){
                     holder.emailNow.setVisibility(View.GONE);
                 }
+                else if (type.equals("Admin")){
+                    holder.emailNow.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -187,7 +190,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             }
         });
 
-
     }
 
     @Override
@@ -196,7 +198,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
 
         public CircleImageView userProfileImage;
         public TextView userName, type, phoneNumber, bloodGroup, userEmail;

@@ -74,7 +74,6 @@ public class AdminRegistration extends AppCompatActivity {
                 final String adminEmail =  reg_adminEmail.getText().toString().trim();
                 final String adminPass =  reg_adminPass.getText().toString().trim();
 
-
                 if(TextUtils.isEmpty(adminName)){
                     reg_adminName.setError("Name is required!");
                     return;
@@ -103,6 +102,7 @@ public class AdminRegistration extends AppCompatActivity {
                             if (!task.isSuccessful()){
                                 String error = task.getException().toString();
                                 Toast.makeText(AdminRegistration.this, "Error" + error, Toast.LENGTH_SHORT).show();
+                                loader.dismiss();
                             }
                             else{
                                 String currentUserId = mAuth.getCurrentUser().getUid();
@@ -143,7 +143,5 @@ public class AdminRegistration extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }
