@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 import com.example.damusasa.Adapter.AppointmentsAdapter;
 import com.example.damusasa.Model.Appointment_model;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -51,7 +53,90 @@ public class All_Appointments extends AppCompatActivity {
         myAdapter = new AppointmentsAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
 
-        database.addValueEventListener(new ValueEventListener() {
+        //Display appointments based on who is logged in
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String type = snapshot.child("type").getValue().toString();
+
+                if (type.equals("center")){
+                    String centerName = snapshot.child("centerName").getValue().toString();
+
+                    //Center name from appointments table is same as center name of logged in user
+                    Query query = database.orderByChild("centerName").equalTo(centerName);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
+                                list.add(user);
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                //If donor is logged in
+                else if (type.equals("donor")){
+                    String name = snapshot.child("name").getValue().toString();
+
+                    //if name from appointments table is same as name of logged in user
+                    Query query = database.orderByChild("CustomerName").equalTo(name);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
+                                list.add(user);
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+
+                else {
+                    //If admin is logged in show all appointments
+                    database.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
+                                list.add(user);
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Show all appointments
+
+        /*database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -65,7 +150,7 @@ public class All_Appointments extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
     @Override

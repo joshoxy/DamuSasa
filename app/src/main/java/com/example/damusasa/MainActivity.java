@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.appointments:
-                Intent intent15 = new Intent(MainActivity.this, Appointments.class);
+                Intent intent15 = new Intent(MainActivity.this, All_Appointments.class);
                 startActivity(intent15);
                 break;
 

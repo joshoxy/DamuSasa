@@ -287,7 +287,7 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.center_appointments:  //View donation center appointments
-                Intent intent12 = new Intent(AdminPage.this, SentEmailsActivity.class); //set intent
+                Intent intent12 = new Intent(AdminPage.this, All_Appointments.class); //set intent
                 startActivity(intent12);
                 break;
 
