@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,8 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_type.setText(requestsModel.getRecipient_blood());
                     holder.r_phone.setText(requestsModel.getRecipient_phone());
                     holder.r_status.setText(requestsModel.getStatus());
+                    holder.Layout_donor.setVisibility(View.GONE);
+
 
                     //Hide button if request has been approved
                     String status = requestsModel.getStatus();
@@ -69,14 +72,24 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
 
 
                 }
-                //What the recipient is supposed to see
-                else {
-                    holder.r_name.setText(requestsModel.getDonor_name());
+                //What the admin is supposed to see
+                else if (type.equals("Admin")){
+                    holder.r_name.setText(requestsModel.getRecipient_name());
+                    holder.d_name.setText(requestsModel.getDonor_name());
                     holder.r_type.setText(requestsModel.getDonor_blood_type());
                     holder.r_phone.setText(requestsModel.getDonor_phone());
                     holder.r_status.setText(requestsModel.getStatus());
                     holder.r_button_accept.setVisibility(View.GONE);
+                }
 
+                //What the recipient is supposed to see
+                else {
+                    holder.d_name.setText(requestsModel.getDonor_name());
+                    holder.r_type.setText(requestsModel.getDonor_blood_type());
+                    holder.r_phone.setText(requestsModel.getDonor_phone());
+                    holder.r_status.setText(requestsModel.getStatus());
+                    holder.r_button_accept.setVisibility(View.GONE);
+                    holder.layout_recipient.setVisibility(View.GONE);
                 }
 
 
@@ -125,16 +138,6 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     }
                 });
 
-                /*new AlertDialog.Builder(context)
-                        .setTitle("Confirm")
-                        .setMessage("Are you sure?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });*/
             }
         });
 
@@ -146,8 +149,9 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView r_name, r_type, r_phone, r_status;
+        TextView r_name, r_type, r_phone, r_status, donor_name, d_name;
         Button r_button_accept;
+        LinearLayout Layout_donor, layout_recipient;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -155,6 +159,11 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
             r_type = itemView.findViewById(R.id.r_type);
             r_phone = itemView.findViewById(R.id.r_phone);
             r_status = itemView.findViewById(R.id.r_status);
+            donor_name = itemView.findViewById(R.id.donor_name);
+            Layout_donor = itemView.findViewById(R.id.Layout_donor);
+            layout_recipient = itemView.findViewById(R.id.layout_recipient);
+            Layout_donor = itemView.findViewById(R.id.Layout_donor);
+            d_name = itemView.findViewById(R.id.d_name);
             r_button_accept = itemView.findViewById(R.id.r_button_accept);
         }
 

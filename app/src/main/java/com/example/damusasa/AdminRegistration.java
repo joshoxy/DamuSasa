@@ -111,9 +111,9 @@ public class AdminRegistration extends AppCompatActivity {
 
                                 HashMap userInfo = new HashMap();
                                 userInfo.put("id",currentUserId);
-                                userInfo.put("adminName",adminName);
-                                userInfo.put("adminPhone",adminPhone);
-                                userInfo.put("adminEmail",adminEmail);
+                                userInfo.put("name",adminName);
+                                userInfo.put("phone",adminPhone);
+                                userInfo.put("email",adminEmail);
                                 userInfo.put("type","Admin");
 
                                 userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {

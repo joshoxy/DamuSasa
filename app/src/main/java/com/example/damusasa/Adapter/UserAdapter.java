@@ -73,10 +73,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String type = snapshot.child("type").getValue().toString();
                 if (type.equals("center")){
-                    holder.emailNow.setVisibility(View.GONE);
+                    holder.emailNow.setVisibility(View.INVISIBLE);
                 }
                 else if (type.equals("Admin")){
-                    holder.emailNow.setVisibility(View.GONE);
+                    holder.emailNow.setVisibility(View.INVISIBLE);
                 }
             }
 

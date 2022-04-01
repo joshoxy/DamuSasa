@@ -121,10 +121,10 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    String name = snapshot.child("adminName").getValue().toString();  //Get user name from name field in Firebase
+                    String name = snapshot.child("name").getValue().toString();  //Get user name from name field in Firebase
                     admin_fullname.setText(name); //Set the nav_fullname to display name from Firebase
 
-                    String email = snapshot.child("adminEmail").getValue().toString();  //Get email from name field in Firebase
+                    String email = snapshot.child("email").getValue().toString();  //Get email from name field in Firebase
                     admin_email.setText(email); //Set the nav_email to display name from Firebase
 
                     String type = snapshot.child("type").getValue().toString();
@@ -292,7 +292,7 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.user_donation_requests:  //View donation requests sent by users
-                Intent intent13 = new Intent(AdminPage.this, NotificationsActivity.class); //set intent
+                Intent intent13 = new Intent(AdminPage.this, SentEmailsActivity.class); //set intent
                 startActivity(intent13);
                 break;
 

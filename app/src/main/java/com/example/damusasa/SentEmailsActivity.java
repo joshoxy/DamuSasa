@@ -83,11 +83,23 @@ public class SentEmailsActivity extends AppCompatActivity {
                     });
 
                 }
+                //If admin is logged in show all requests
+                else if (type.equals("Admin")){
+                        getSupportActionBar().setTitle("User requests");
+                        //Display all requests without query
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            Recipient_Requests_Model model = snapshot.getValue(Recipient_Requests_Model.class);
+                            list.add(model);
+                        }
+                        recipient_requests_adapter.notifyDataSetChanged();
+
+                    }
+
                 //If recipient run query to show donor details
                 else{
                     getSupportActionBar().setTitle("Sent requests");
                     //Query for recipient logged in
-                    Query query = database.orderByChild("recipient_name").equalTo(donor_name);
+                    Query query = database.orderByChild("recipient_name").equalTo(donor_name); //donor_name name is user name
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

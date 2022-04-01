@@ -19,6 +19,7 @@
 
         //Recipient Name
         <LinearLayout
+            android:id="@+id/layout_recipient"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
@@ -33,6 +34,7 @@
 
             <TextView
                 android:text="Recipient name: "
+                android:id="@+id/donor_name"
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
@@ -41,6 +43,37 @@
             <TextView
                 android:id="@+id/r_name"
                 android:text="Recipient name"
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        //Donor Name for admin
+        <LinearLayout
+            android:id="@+id/Layout_donor"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_profile"
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Donor name: "
+                android:textSize="20sp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/d_name"
+                android:text="Donor name"
                 android:textSize="20sp"
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
