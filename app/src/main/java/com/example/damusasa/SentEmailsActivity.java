@@ -87,10 +87,11 @@ public class SentEmailsActivity extends AppCompatActivity {
                 else if (type.equals("Admin")){
                         getSupportActionBar().setTitle("User requests");
                         //Display all requests without query
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            Recipient_Requests_Model model = snapshot.getValue(Recipient_Requests_Model.class);
-                            list.add(model);
-                        }
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
+                        list.add(model);
+                    }
                         recipient_requests_adapter.notifyDataSetChanged();
 
                     }

@@ -1,11 +1,15 @@
 package com.example.damusasa.Adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -60,6 +65,44 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Add onClick for cancel button
+        holder.button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                        .child("appointments");
+                reference1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String ref_Id = user.getRef_Id();
+                        Query query = reference1.orderByChild(ref_Id);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                    dataSnapshot.getRef().removeValue();
+                                    Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
+                                    ((Activity)context).finish();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
         });

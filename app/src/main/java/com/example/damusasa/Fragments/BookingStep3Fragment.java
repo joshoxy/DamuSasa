@@ -124,9 +124,10 @@ public class BookingStep3Fragment extends Fragment {
                 if (snapshot.exists()){
                     String CustomerName = snapshot.child("name").getValue().toString();
                     String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
+                    String ref_Id = snapshot.getKey();
                     //Upload
                     userDatabaseRef = FirebaseDatabase.getInstance().getReference()
-                            .child("appointments").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            .child("appointments").push();
 
                     HashMap userInfo = new HashMap();
                     userInfo.put("CustomerName",CustomerName);
@@ -135,6 +136,7 @@ public class BookingStep3Fragment extends Fragment {
                     userInfo.put("centerName",CenterName);
                     userInfo.put("CenterAddress",CenterAddress);
                     userInfo.put("Time",Time);
+                    userInfo.put("ref_Id", ref_Id);
 
                     userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                         @Override

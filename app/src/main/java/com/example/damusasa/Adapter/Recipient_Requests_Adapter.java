@@ -63,13 +63,11 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_status.setText(requestsModel.getStatus());
                     holder.Layout_donor.setVisibility(View.GONE);
 
-
                     //Hide button if request has been approved
                     String status = requestsModel.getStatus();
                     if (status.equals("Approved")){
                         holder.r_button_accept.setVisibility(View.GONE);
                     }
-
 
                 }
                 //What the admin is supposed to see
