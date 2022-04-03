@@ -78,6 +78,8 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                 reference1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        //Fix here
                         String ref_Id = user.getRef_Id();
                         Query query = reference1.orderByChild(ref_Id);
                         query.addValueEventListener(new ValueEventListener() {
