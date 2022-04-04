@@ -124,12 +124,45 @@ public class BookingStep3Fragment extends Fragment {
                 if (snapshot.exists()){
                     String CustomerName = snapshot.child("name").getValue().toString();
                     String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
-                    String ref_Id = snapshot.getKey();
+
                     //Upload
                     userDatabaseRef = FirebaseDatabase.getInstance().getReference()
                             .child("appointments").push();
+                    userDatabaseRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String ref_Id = snapshot.getKey();
+                            HashMap userInfo = new HashMap();
+                            userInfo.put("CustomerName",CustomerName);
+                            userInfo.put("CustomerPhone",CustomerPhone);
+                            userInfo.put("CenterId",CenterId);
+                            userInfo.put("centerName",CenterName);
+                            userInfo.put("CenterAddress",CenterAddress);
+                            userInfo.put("Time",Time);
+                            userInfo.put("ref_Id", ref_Id);
 
-                    HashMap userInfo = new HashMap();
+                            userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                @Override
+                                public void onComplete(@NonNull Task task) {
+                                    resetStaticActivity();  //Allow user to book again
+                                    getActivity().finish(); //Close Activity
+                                    Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                    /*HashMap userInfo = new HashMap();
                     userInfo.put("CustomerName",CustomerName);
                     userInfo.put("CustomerPhone",CustomerPhone);
                     userInfo.put("CenterId",CenterId);
@@ -150,7 +183,10 @@ public class BookingStep3Fragment extends Fragment {
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
+
+                    //End of upload code
+
                 }
             }
 

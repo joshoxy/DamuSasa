@@ -73,15 +73,60 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         holder.button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                new AlertDialog.Builder(context)
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                                        .child("appointments");
+                                reference1.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        //Fix here
+                                        String ref_id = user.getRef_Id();
+                                        Query query = reference1.orderByChild("ref_Id").equalTo(ref_id);
+                                        query.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                                    dataSnapshot.getRef().removeValue();
+                                                    Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
+                                                    ((Activity)context).finish();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
+                /*DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
                         .child("appointments");
                 reference1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         //Fix here
-                        String ref_Id = user.getRef_Id();
-                        Query query = reference1.orderByChild(ref_Id);
+                        String ref_id = user.getRef_Id();
+                        Query query = reference1.orderByChild("ref_Id").equalTo(ref_id);
                         query.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -104,7 +149,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
+
+                //End of cancel request code
 
             }
         });

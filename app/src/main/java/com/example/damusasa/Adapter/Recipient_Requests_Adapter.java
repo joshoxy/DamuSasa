@@ -104,38 +104,48 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
         holder.r_button_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
-                        .child("recipient_requests");
-                reference1.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String ref_id = requestsModel.getRef_id();
-                        HashMap userInfo = new HashMap();
-                        userInfo.put("status", "Approved");
-                        reference1.child(ref_id).updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                new AlertDialog.Builder(context)
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onComplete(@NonNull Task task) {
-                                Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show();
-                                ((Activity)context).finish();
-                                holder.r_button_accept.setVisibility(View.GONE);
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                                        .child("recipient_requests");
+                                reference1.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String ref_id = requestsModel.getRef_id();
+                                        HashMap userInfo = new HashMap();
+                                        userInfo.put("status", "Approved");
+                                        reference1.child(ref_id).updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                            @Override
+                                            public void onComplete(@NonNull Task task) {
+                                                Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show();
+                                                ((Activity)context).finish();
+                                                holder.r_button_accept.setVisibility(View.GONE);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                        //end of update
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-                        //end of update
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
