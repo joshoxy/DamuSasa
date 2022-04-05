@@ -88,11 +88,22 @@ public class SentEmailsActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle("User requests");
                         //Display all requests without query
 
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
-                        list.add(model);
-                    }
-                        recipient_requests_adapter.notifyDataSetChanged();
+                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("recipient_requests");
+                    reference1.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
+                                list.add(model);
+                            }
+                            recipient_requests_adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
                     }
 

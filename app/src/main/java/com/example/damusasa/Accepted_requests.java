@@ -30,6 +30,7 @@ public class Accepted_requests extends AppCompatActivity {
     Accepted_Requests_Adapter myAdapter;
     ArrayList<Accepted_Requests_Model> list;
 
+    //Accepted requests for donation centers
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,24 +58,46 @@ public class Accepted_requests extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String center_name = snapshot.child("centerName").getValue().toString();
-                Query query = database.orderByChild("center_name").equalTo(center_name);
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            Accepted_Requests_Model requests_model = dataSnapshot.getValue(Accepted_Requests_Model.class);
-                            list.add(requests_model);
+                String type = snapshot.child("type").getValue().toString();
+                if (type.equals("center")){
+                    String center_name = snapshot.child("centerName").getValue().toString();
+                    Query query = database.orderByChild("center_name").equalTo(center_name);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Accepted_Requests_Model requests_model = dataSnapshot.getValue(Accepted_Requests_Model.class);
+                                list.add(requests_model);
+                            }
+                            myAdapter.notifyDataSetChanged();
+
                         }
-                        myAdapter.notifyDataSetChanged();
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+                else if (type.equals("Admin")){
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("accepted_center_donation");
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Accepted_Requests_Model requests_model = dataSnapshot.getValue(Accepted_Requests_Model.class);
+                                list.add(requests_model);
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
             }
 
             @Override

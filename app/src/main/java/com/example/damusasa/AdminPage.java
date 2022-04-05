@@ -297,7 +297,7 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.accepted_center_requests:  //View donation center requests accepted
-                Intent intent14 = new Intent(AdminPage.this, BookingActivity.class);  //set intent
+                Intent intent14 = new Intent(AdminPage.this, Accepted_requests.class);  //set intent
                 startActivity(intent14);
                 break;
 
