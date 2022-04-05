@@ -134,6 +134,33 @@
 
                 </LinearLayout>
 
+                //Booking Date
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:text="Booking Date: "
+                            android:textSize="20sp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/all_txt_date"
+                            android:text="Date"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/button_cancel"
                     android:text="Cancel"

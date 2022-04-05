@@ -35,7 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,6 +126,8 @@ public class BookingStep3Fragment extends Fragment {
                 if (snapshot.exists()){
                     String CustomerName = snapshot.child("name").getValue().toString();
                     String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
+                    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
 
                     //Upload
                     userDatabaseRef = FirebaseDatabase.getInstance().getReference()
@@ -139,6 +143,7 @@ public class BookingStep3Fragment extends Fragment {
                             userInfo.put("centerName",CenterName);
                             userInfo.put("CenterAddress",CenterAddress);
                             userInfo.put("Time",Time);
+                            userInfo.put("BookingDate",date);
                             userInfo.put("ref_Id", ref_Id);
 
                             userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {

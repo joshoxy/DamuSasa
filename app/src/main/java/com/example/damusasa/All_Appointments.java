@@ -21,6 +21,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class All_Appointments extends AppCompatActivity {
 
@@ -42,14 +44,19 @@ public class All_Appointments extends AppCompatActivity {
         getSupportActionBar().setTitle("Appointments");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerAppoint);
-
         database = FirebaseDatabase.getInstance().getReference("appointments");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<>();
+        Collections.sort(list, new Comparator<Appointment_model>() {
+            @Override
+            public int compare(Appointment_model lhs, Appointment_model rhs) {
+                return rhs.getBookingDate().compareToIgnoreCase(lhs.getBookingDate());
+            }
+        });
+
         myAdapter = new AppointmentsAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
 

@@ -50,6 +50,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         holder.centerName.setText(user.getCenterName());
         holder.centerAddress.setText(user.getCenterAddress());
         holder.Time.setText(user.getTime());
+        holder.BookingDate.setText(user.getBookingDate());
 
         //Show button if donor is logged in
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users")
@@ -164,7 +165,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView donorName, centerName, centerAddress, Time;
+        TextView donorName, centerName, centerAddress, Time, BookingDate;
         Button button_cancel;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -173,6 +174,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
             centerName = itemView.findViewById(R.id.all_txt_center_name);
             centerAddress = itemView.findViewById(R.id.all_txt_location);
             Time = itemView.findViewById(R.id.all_txt_time);
+            BookingDate = itemView.findViewById(R.id.all_txt_date);
             button_cancel = itemView.findViewById(R.id.button_cancel);
         }
     }

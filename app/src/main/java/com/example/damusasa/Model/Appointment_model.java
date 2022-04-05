@@ -1,7 +1,7 @@
 package com.example.damusasa.Model;
 
 public class Appointment_model {
-    String CustomerName, centerName, CenterAddress, Time, ref_Id;
+    String CustomerName, centerName, CenterAddress, Time, ref_Id, BookingDate;
 
     public String getCustomerName() {
         return CustomerName;
@@ -21,5 +21,9 @@ public class Appointment_model {
 
     public String getRef_Id() {
         return ref_Id;
+    }
+
+    public String getBookingDate() {
+        return BookingDate;
     }
 }
