@@ -114,9 +114,10 @@ public class All_Appointments extends AppCompatActivity {
 
                 }
 
-                else {
+                else if (type.equals("Admin")) {
                     //If admin is logged in show all appointments
-                    database.addValueEventListener(new ValueEventListener() {
+                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("appointments");
+                    reference1.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -131,6 +132,23 @@ public class All_Appointments extends AppCompatActivity {
 
                         }
                     });
+
+                    /*database.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
+                                list.add(user);
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });*/
+                    //end of dbRef
 
                 }
             }
