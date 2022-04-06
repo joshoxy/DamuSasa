@@ -88,9 +88,8 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_status.setText(requestsModel.getStatus());
                     holder.r_button_accept.setVisibility(View.GONE);
                     holder.layout_recipient.setVisibility(View.GONE);
+                    holder.r_button_cancel.setVisibility(View.VISIBLE);
                 }
-
-
 
             }
 
@@ -149,6 +148,58 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
             }
         });
 
+        //Set on click listener for cancel request
+        holder.r_button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference()
+                                        .child("recipient_requests");
+                                reference1.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        //Fix here
+                                        String ref_id = requestsModel.getRef_id();
+                                        Query query = reference1.orderByChild("ref_id").equalTo(ref_id);
+                                        query.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                                    dataSnapshot.getRef().removeValue();
+                                                    Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
+                                                    ((Activity)context).finish();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+
     }
 
     @Override
@@ -158,7 +209,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView r_name, r_type, r_phone, r_status, donor_name, d_name;
-        Button r_button_accept;
+        Button r_button_accept, r_button_cancel;
         LinearLayout Layout_donor, layout_recipient;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -173,6 +224,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
             Layout_donor = itemView.findViewById(R.id.Layout_donor);
             d_name = itemView.findViewById(R.id.d_name);
             r_button_accept = itemView.findViewById(R.id.r_button_accept);
+            r_button_cancel = itemView.findViewById(R.id.r_button_cancel);
         }
 
     }
