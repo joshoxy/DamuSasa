@@ -16,7 +16,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.damusasa.Model.Accepted_Requests_Model;
 import com.example.damusasa.Model.Center_Requests_Model;
+import com.example.damusasa.Model.User;
 import com.example.damusasa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,11 +33,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Requests_Adapter.MyViewHolder2> {
 
     Context context;
     ArrayList<Center_Requests_Model> list;
+
 
     public Center_Requests_Adapter(Context context, ArrayList<Center_Requests_Model> list) {
         this.context = context;
@@ -52,6 +56,8 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder2 holder, int position) {
         Center_Requests_Model requests_model = list.get(position);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
         holder.c_name.setText(requests_model.getName());
         holder.c_type.setText(requests_model.getBloodGroup());
         holder.c_location.setText(requests_model.getLocation());
@@ -61,6 +67,8 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
         String center_name = requests_model.getName();
         String location = requests_model.getLocation();
         String address = requests_model.getAddress();
+
+        String currentUserId = mAuth.getCurrentUser().getUid();
 
         //Set On Click for donate button
         holder.c_button_request.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +81,13 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                /*if (userId_fromTable.equals(currentUserId)){
+
+                                }
+                                else {
+
+                                }*/
+
                                 DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -86,33 +101,50 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                                 String donor_name = snapshot.child("name").getValue().toString();
                                                 String donor_phone = snapshot.child("phoneNumber").getValue().toString();
                                                 String donor_blood = snapshot.child("bloodGroup").getValue().toString();
+                                                String user_Id = snapshot.child("id").getValue().toString();
 
                                                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("accepted_center_donation")
                                                         .push();
 
-                                                HashMap userInfo = new HashMap();
-                                                userInfo.put("donor_name",donor_name);
-                                                userInfo.put("donor_phone",donor_phone);
-                                                userInfo.put("donor_blood",donor_blood);
-                                                userInfo.put("center_name",center_name);
-                                                userInfo.put("location",location);
-                                                userInfo.put("address",address);
-                                                userInfo.put("date",date);
-
-
-                                                reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                                reference1.addValueEventListener(new ValueEventListener() {
                                                     @Override
-                                                    public void onComplete(@NonNull Task task) {
-                                                        Toast.makeText(v.getContext(), "Successfully sent!", Toast.LENGTH_SHORT).show();
-                                                        ((Activity)context).finish();
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        String ref_Id = snapshot.getKey();
+
+                                                        HashMap userInfo = new HashMap();
+                                                        userInfo.put("donor_name",donor_name);
+                                                        userInfo.put("donor_phone",donor_phone);
+                                                        userInfo.put("donor_blood",donor_blood);
+                                                        userInfo.put("center_name",center_name);
+                                                        userInfo.put("location",location);
+                                                        userInfo.put("address",address);
+                                                        userInfo.put("date",date);
+                                                        userInfo.put("ref_Id",ref_Id);
+                                                        userInfo.put("user_Id",user_Id);
+
+                                                        reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task task) {
+                                                                Toast.makeText(v.getContext(), "Successfully sent!", Toast.LENGTH_SHORT).show();
+                                                                ((Activity)context).finish();
+
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                                        //end of upload code
 
                                                     }
-                                                }).addOnFailureListener(new OnFailureListener() {
+
                                                     @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
                                                     }
                                                 });
+
 
                                             }
 
@@ -125,6 +157,8 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
 
                                     }
                                 };
+                                //end of date pick listener
+
                                 Calendar calendar = Calendar.getInstance();
                                 int year = calendar.get(Calendar.YEAR);
                                 int month = calendar.get(Calendar.MONTH);
@@ -135,13 +169,17 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                 holder.datePickerDialog.setTitle("Pick a date");
                                 holder.datePickerDialog.setCancelable(false);
                                 holder.datePickerDialog.show();
+                                //Paste up to here
                             }
+                            //end of onClick
                         })
+                        //end of dialogInterface
                         .setNegativeButton("No", null)
                         .show();
 
             }
         });
+        //end of button onClick
 
     }
 
