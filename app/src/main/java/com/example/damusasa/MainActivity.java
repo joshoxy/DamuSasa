@@ -305,6 +305,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent16);
                 break;
 
+            case R.id.blood_drives:  //Add intent to view all center requests
+                Intent intent17 = new Intent(MainActivity.this, BloodDrivesSet.class);
+                startActivity(intent17);
+                break;
+
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);

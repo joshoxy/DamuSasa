@@ -78,6 +78,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                     holder.r_phone.setText(requestsModel.getDonor_phone());
                     holder.r_status.setText(requestsModel.getStatus());
                     holder.r_button_accept.setVisibility(View.GONE);
+                    holder.r_button_cancel.setVisibility(View.VISIBLE);
                 }
 
                 //What the recipient is supposed to see

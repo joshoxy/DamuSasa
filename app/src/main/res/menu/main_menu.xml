@@ -35,6 +35,11 @@
         android:icon="@drawable/ic_hospital"
         android:title="Donation Center Requests"/>
 
+    <item
+        android:id="@+id/blood_drives"
+        android:icon="@drawable/ic_drive"
+        android:title="Blood Drives"/>
+
     <item android:title="Blood Groups">
         <menu>
             <group android:checkableBehavior="single">

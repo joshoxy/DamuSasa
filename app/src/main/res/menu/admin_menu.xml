@@ -21,6 +21,11 @@
         android:icon="@drawable/ic_baseline_accept"
         android:title="Accepted center requests"/>
 
+    <item
+        android:id="@+id/blood_drive"
+        android:icon="@drawable/ic_new"
+        android:title="New blood drive"/>
+
     <item android:title="Actions">
         <menu>
             <group android:checkableBehavior="single">

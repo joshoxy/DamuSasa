@@ -205,7 +205,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity {
                                     });
                                 }
 
-
                                 userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                                     @Override
                                     public void onComplete(@NonNull Task task) {

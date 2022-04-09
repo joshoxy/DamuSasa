@@ -10,6 +10,7 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/cancel_buttons_background.xml" value="0.22777777777777777" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/gradient_bg.xml" value="0.18055555555555555" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/header_background.xml" value="0.2638888888888889" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/ic_add.xml" value="0.22314814814814815" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/ic_check.xml" value="0.2638888888888889" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/ic_number.xml" value="0.23703703703703705" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/drawable/ic_person.xml" value="0.23703703703703705" />
@@ -25,6 +26,8 @@
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_admin_registration.xml" value="0.24818840579710144" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_all_appointments.xml" value="0.24003623188405798" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_appointments.xml" value="0.264" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_blood_drive.xml" value="0.245018115942029" />
+        <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_blood_drives_set.xml" value="0.245018115942029" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_booking.xml" value="0.2" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_category_selected.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/DamuSasa/app/src/main/res/layout/activity_center_login.xml" value="0.24592391304347827" />

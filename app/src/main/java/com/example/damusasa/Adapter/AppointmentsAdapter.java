@@ -62,6 +62,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                 if (type.equals("donor")){
                     holder.button_cancel.setVisibility(View.VISIBLE);
                 }
+                if (type.equals("Admin")){
+                    holder.button_cancel.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

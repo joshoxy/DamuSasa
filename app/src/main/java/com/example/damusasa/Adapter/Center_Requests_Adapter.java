@@ -123,29 +123,6 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                                         userInfo.put("ref_Id",ref_Id);
                                                         userInfo.put("user_Id",user_Id);
 
-                                                        /*if (snapshot.child("user_Id").exists()){
-                                                            if (currentUserId.equals(snapshot.child("user_Id").getValue().toString())){
-                                                                Toast.makeText(v.getContext(), "Request already sent!", Toast.LENGTH_SHORT).show();
-
-                                                            }
-                                                        }
-                                                        else {
-                                                            reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task task) {
-                                                                    Toast.makeText(v.getContext(), "Successfully sent!", Toast.LENGTH_SHORT).show();
-                                                                    ((Activity)context).finish();
-
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            });
-                                                            //end of upload code
-                                                        }*/
-
                                                         reference1.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
                                                             @Override
                                                             public void onComplete(@NonNull Task task) {
