@@ -22,6 +22,11 @@
         android:title="Accepted center requests"/>
 
     <item
+        android:id="@+id/blood_drives"
+        android:icon="@drawable/ic_drive"
+        android:title="Blood Drives"/>
+
+    <item
         android:id="@+id/blood_drive"
         android:icon="@drawable/ic_new"
         android:title="New blood drive"/>

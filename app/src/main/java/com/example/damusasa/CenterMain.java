@@ -327,6 +327,11 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent16);
                 break;
 
+            case R.id.blood_drives: //Add Intent for Viewing accepted requests
+                Intent intent17 = new Intent(CenterMain.this, BloodDrivesSet.class);
+                startActivity(intent17);
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(CenterMain.this, LoginActivity.class);

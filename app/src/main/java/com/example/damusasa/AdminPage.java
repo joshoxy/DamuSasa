@@ -301,9 +301,14 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent14);
                 break;
 
-            case R.id.blood_drive:  //Blood drive page
+            case R.id.blood_drive:  //New Blood drive page
                 Intent intent15 = new Intent(AdminPage.this, BloodDrive.class);  //set intent
                 startActivity(intent15);
+                break;
+
+            case R.id.blood_drives:  //Blood drives set
+                Intent intent16 = new Intent(AdminPage.this, BloodDrivesSet.class);  //set intent
+                startActivity(intent16);
                 break;
 
             case R.id.logout:
