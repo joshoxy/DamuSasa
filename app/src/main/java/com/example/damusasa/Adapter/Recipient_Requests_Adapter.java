@@ -130,7 +130,6 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(v.getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
                                             }
                                         });
                                         //end of update
@@ -199,7 +198,6 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                         .show();
             }
         });
-
 
     }
 

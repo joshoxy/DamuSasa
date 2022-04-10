@@ -82,13 +82,6 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /*if (userId_fromTable.equals(currentUserId)){
-
-                                }
-                                else {
-
-                                }*/
-
                                 DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

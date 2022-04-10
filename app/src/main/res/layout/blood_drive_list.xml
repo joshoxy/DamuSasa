@@ -17,8 +17,6 @@
         android:layout_marginBottom="5dp"
         android:orientation="vertical">
 
-
-
         //Center Name
         <LinearLayout
             android:orientation="horizontal"
@@ -171,6 +169,18 @@
 
 
         </LinearLayout>
+
+        //Accept drive only available to donor and recipient
+        <Button
+            android:id="@+id/button_attend"
+            android:text="Attend"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttons_background"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content"/>
 
         //Cancel drive only available to admin
         <Button
