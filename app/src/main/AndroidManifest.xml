@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".Blood_drive_members"
+            android:exported="false" />
+        <activity
             android:name=".BloodDrivesSet"
             android:exported="false" />
         <activity

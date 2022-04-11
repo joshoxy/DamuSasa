@@ -26,6 +26,11 @@
         android:icon="@drawable/ic_drive"
         android:title="Blood Drives"/>
 
+    <item
+        android:id="@+id/members_drive"
+        android:icon="@drawable/ic_people"
+        android:title="Attending blood drives"/>
+
     <item android:title="Blood Groups">
         <menu>
             <group android:checkableBehavior="single">

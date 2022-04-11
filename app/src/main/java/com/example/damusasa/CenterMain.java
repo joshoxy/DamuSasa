@@ -327,9 +327,14 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent16);
                 break;
 
-            case R.id.blood_drives: //Add Intent for Viewing accepted requests
+            case R.id.blood_drives: //Add Intent for Viewing set blood drives
                 Intent intent17 = new Intent(CenterMain.this, BloodDrivesSet.class);
                 startActivity(intent17);
+                break;
+
+            case R.id.members_drive: //Add Intent for Viewing attending blood drives
+                Intent intent18 = new Intent(CenterMain.this, Blood_drive_members.class);
+                startActivity(intent18);
                 break;
 
             case R.id.logout:

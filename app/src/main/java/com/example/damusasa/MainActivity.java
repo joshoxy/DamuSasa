@@ -310,6 +310,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent17);
                 break;
 
+            case R.id.members_drive: //Add Intent for Viewing attending blood drives
+                Intent intent18 = new Intent(MainActivity.this, Blood_drive_members.class);
+                startActivity(intent18);
+                break;
+
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);

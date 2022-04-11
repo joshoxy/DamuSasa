@@ -311,6 +311,11 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent16);
                 break;
 
+            case R.id.members_drive: //Add Intent for Viewing attending blood drives
+                Intent intent18 = new Intent(AdminPage.this, Blood_drive_members.class);
+                startActivity(intent18);
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(AdminPage.this, LoginActivity.class);

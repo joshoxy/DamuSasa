@@ -53,7 +53,7 @@ public class All_Appointments extends AppCompatActivity {
         Collections.sort(list, new Comparator<Appointment_model>() {
             @Override
             public int compare(Appointment_model lhs, Appointment_model rhs) {
-                return rhs.getBookingDate().compareToIgnoreCase(lhs.getBookingDate());
+                return lhs.getBookingDate().compareToIgnoreCase(rhs.getBookingDate());
             }
         });
 
