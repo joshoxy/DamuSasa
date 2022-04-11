@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import java.util.Date;
 
 import com.example.damusasa.Common.Common;
 import com.example.damusasa.Model.BookingInformation;
@@ -33,11 +34,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import android.text.format.DateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,43 +69,6 @@ public class BookingStep3Fragment extends Fragment {
     TextView txt_phone;
 
     @OnClick(R.id.btn_confirm)
-            /*void confirmBooking(){
-
-        //Create booking information
-        BookingInformation bookingInformation = new BookingInformation();
-        bookingInformation.setCenterId(Common.currentBarber.getBranchId());
-        bookingInformation.setCenterAddress(Common.currentBarber.getAddress());
-        bookingInformation.setCenterName(Common.currentBarber.getName());
-        bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-                .append(" on ")
-                .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
-        bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
-
-        //Upload
-        DocumentReference bookingDate = FirebaseFirestore.getInstance()
-                .collection("DonationCenters")
-                .document(Common.city)
-                .collection("Branch")
-                .document(Common.currentBarber.getBranchId())
-                .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
-                .document(String.valueOf(Common.currentTimeSlot));
-
-        //Write
-        bookingDate.set(bookingInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                getActivity().finish(); //Close Activity
-                Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }*/
 
     void confirmBooking(){
 
@@ -127,7 +93,6 @@ public class BookingStep3Fragment extends Fragment {
                     String CustomerName = snapshot.child("name").getValue().toString();
                     String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
                     String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
 
                     //Upload
                     userDatabaseRef = FirebaseDatabase.getInstance().getReference()
@@ -166,30 +131,6 @@ public class BookingStep3Fragment extends Fragment {
 
                         }
                     });
-
-                    /*HashMap userInfo = new HashMap();
-                    userInfo.put("CustomerName",CustomerName);
-                    userInfo.put("CustomerPhone",CustomerPhone);
-                    userInfo.put("CenterId",CenterId);
-                    userInfo.put("centerName",CenterName);
-                    userInfo.put("CenterAddress",CenterAddress);
-                    userInfo.put("Time",Time);
-                    userInfo.put("ref_Id", ref_Id);
-
-                    userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
-                        @Override
-                        public void onComplete(@NonNull Task task) {
-                            resetStaticActivity();  //Allow user to book again
-                            getActivity().finish(); //Close Activity
-                            Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });*/
-
                     //End of upload code
 
                 }

@@ -160,16 +160,33 @@
 
                 </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/button_edit"
+                    android:text="Change date"
+                    android:textAllCaps="false"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/buttons_background"
+                    android:layout_width="0dp"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"/>
                 <Button
                     android:id="@+id/button_cancel"
                     android:text="Cancel"
-                    android:visibility="gone"
+                    android:layout_weight="1"
                     android:textAllCaps="false"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/buttons_background"
-                    android:layout_width="match_parent"
-                    android:layout_margin="15dp"
+                    android:layout_width="0dp"
+                    android:layout_margin="8dp"
                     android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         </LinearLayout>
 

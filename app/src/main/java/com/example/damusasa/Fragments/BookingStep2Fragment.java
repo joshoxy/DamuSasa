@@ -200,6 +200,7 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
 
                     //New method
                      loadAvailableTimeSlot();
+
                 }
             }
         });

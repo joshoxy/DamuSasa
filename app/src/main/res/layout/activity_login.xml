@@ -141,6 +141,7 @@
                     android:layout_gravity="center"
                     android:textColor="#fff"
                     android:textSize="15sp"
+                    android:visibility="gone"
                     android:textAlignment="center"
                     android:height="45dp"
                     android:background="@drawable/buttons_background"

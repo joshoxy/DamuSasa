@@ -57,8 +57,11 @@ public class All_Appointments extends AppCompatActivity {
             }
         });
 
+
         myAdapter = new AppointmentsAdapter(this, list);
+        myAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(myAdapter);
+
 
         //Display appointments based on who is logged in
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users")
