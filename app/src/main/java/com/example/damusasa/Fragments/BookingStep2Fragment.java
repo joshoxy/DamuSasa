@@ -149,7 +149,7 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
         iTimeSlotLoadListener = this;
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(displayTimeSlot, new IntentFilter(Common.KEY_DISPLAY_TIME_SLOT));
-        simpleDateFormat = new SimpleDateFormat("dd_MM_yyyy");
+        simpleDateFormat = new SimpleDateFormat("MMM dd yyyy");
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
 

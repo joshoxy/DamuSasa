@@ -1,5 +1,6 @@
 package com.example.damusasa.Fragments;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -92,7 +93,8 @@ public class BookingStep3Fragment extends Fragment {
                 if (snapshot.exists()){
                     String CustomerName = snapshot.child("name").getValue().toString();
                     String CustomerPhone = snapshot.child("phoneNumber").getValue().toString();
-                    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                    String date = new SimpleDateFormat("MMM dd yyyy", Locale.getDefault()).format(new Date());
+                    String date2 = new StringBuilder().append(simpleDateFormat.format(Common.currentDate.getTime())).toString();
 
                     //Upload
                     userDatabaseRef = FirebaseDatabase.getInstance().getReference()
@@ -108,7 +110,7 @@ public class BookingStep3Fragment extends Fragment {
                             userInfo.put("centerName",CenterName);
                             userInfo.put("CenterAddress",CenterAddress);
                             userInfo.put("Time",Time);
-                            userInfo.put("BookingDate",date);
+                            userInfo.put("BookingDate",date2);
                             userInfo.put("ref_Id", ref_Id);
 
                             userDatabaseRef.updateChildren(userInfo).addOnCompleteListener(new OnCompleteListener() {
@@ -117,6 +119,7 @@ public class BookingStep3Fragment extends Fragment {
                                     resetStaticActivity();  //Allow user to book again
                                     getActivity().finish(); //Close Activity
                                     Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -142,6 +145,24 @@ public class BookingStep3Fragment extends Fragment {
             }
         });
 
+    }
+
+    public String parseDateToddMMyyyy(String date) {
+        String inputPattern = "yyyy-MM-dd";
+        String outputPattern = "MMM dd yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date1 = null;
+        String str = null;
+
+        try {
+            date1 = inputFormat.parse(date);
+            str = outputFormat.format(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 
     private void resetStaticActivity() {
@@ -171,6 +192,8 @@ public class BookingStep3Fragment extends Fragment {
 
     }
 
+
+
     static BookingStep3Fragment instance;
 
     public static BookingStep3Fragment getInstance() {
@@ -182,7 +205,7 @@ public class BookingStep3Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        simpleDateFormat = new SimpleDateFormat("MMM dd yyyy");
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(confirmBookingReceiver, new IntentFilter(Common.KEY_CONFIRM_BOOKING));
     }

@@ -61,7 +61,7 @@ public class Blood_drives_adapter extends RecyclerView.Adapter<Blood_drives_adap
         String drive_location = blood_drives_model.getLocation();
         String drive_type = blood_drives_model.getBloodGroup();
         String drive_date = blood_drives_model.getDate();
-        String drive_time = blood_drives_model.getDate();
+        String drive_time = blood_drives_model.getTime();
 
         //Show buttons based on who is logged in
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users")
