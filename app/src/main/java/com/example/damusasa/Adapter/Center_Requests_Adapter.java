@@ -163,6 +163,13 @@ public class Center_Requests_Adapter extends RecyclerView.Adapter<Center_Request
                                 holder.datePickerDialog.setTitle("Pick a date");
                                 holder.datePickerDialog.setCancelable(false);
                                 holder.datePickerDialog.show();
+
+                                //set min date for datePicker
+                                holder.datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                                Calendar c = Calendar.getInstance();
+                                c.add(Calendar.DAY_OF_MONTH,60);
+                                //Set the maximum date to select from DatePickerDialog
+                                holder.datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
                                 //Paste up to here
                             }
                             //end of onClick

@@ -217,6 +217,14 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                                         holder.datePickerDialog = new DatePickerDialog(((Activity)context), style, dateSetListener, year, month, day);
                                         holder.datePickerDialog.setTitle("Pick a new date");
                                         holder.datePickerDialog.setCancelable(false);
+
+                                        //set min date for datePicker
+                                        holder.datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                                        Calendar c = Calendar.getInstance();
+                                        c.add(Calendar.DAY_OF_MONTH,60);
+                                        //Set the maximum date to select from DatePickerDialog
+                                        holder.datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+
                                         if(!((Activity) context).isFinishing())
                                         {
                                             holder.datePickerDialog.show();
@@ -287,6 +295,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         TextView donorName, centerName, centerAddress, Time, BookingDate;
         Button button_cancel,button_edit;
         DatePickerDialog datePickerDialog;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
