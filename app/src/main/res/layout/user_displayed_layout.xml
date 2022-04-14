@@ -55,7 +55,7 @@
                 android:layout_margin="2dp"
                 android:textAlignment="textStart"
                 android:textColor="#000"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
 
             <TextView
