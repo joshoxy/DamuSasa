@@ -337,6 +337,11 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent18);
                 break;
 
+            case R.id.blood_stock: //Add Intent for choosing stock action
+                Intent intent19 = new Intent(CenterMain.this, SelectBloodStock.class);
+                startActivity(intent19);
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(CenterMain.this, LoginActivity.class);

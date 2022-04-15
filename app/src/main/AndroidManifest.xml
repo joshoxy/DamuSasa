@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".BloodStock"
+            android:exported="false" />
+        <activity
+            android:name=".AddBloodStock"
+            android:exported="false" />
+        <activity
+            android:name=".SelectBloodStock"
+            android:exported="false" />
+        <activity
             android:name=".Blood_drive_members"
             android:exported="false" />
         <activity

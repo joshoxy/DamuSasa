@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="@drawable/gradient_bg"
-    tools:context=".RecipientRegistrationActivity">
+    tools:context=".CenterRegistration">
 
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
