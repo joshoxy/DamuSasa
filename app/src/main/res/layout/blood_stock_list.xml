@@ -167,12 +167,15 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/dltRecord"
-            android:src="@drawable/ic_delete"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_remove"
+            android:text="Remove"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttons_background"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>

@@ -22,7 +22,9 @@ public class SelectBloodStock extends AppCompatActivity {
         viewStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SelectBloodStock.this, BloodStock.class);
+                startActivity(intent);
+                finish();
             }
         });
 

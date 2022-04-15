@@ -316,6 +316,11 @@ public class AdminPage extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent18);
                 break;
 
+            case R.id.blood_stock: //Add Intent for choosing stock action
+                Intent intent19 = new Intent(AdminPage.this, BloodStock.class);
+                startActivity(intent19);
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(AdminPage.this, LoginActivity.class);
