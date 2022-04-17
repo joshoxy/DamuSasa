@@ -2,8 +2,10 @@ package com.example.damusasa.Adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.damusasa.Model.BloodStock_model;
 import com.example.damusasa.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,6 +55,7 @@ public class BloodStock_Adapter extends RecyclerView.Adapter<BloodStock_Adapter.
         holder.expiry_date.setText(bloodStockModel.getExpiry_date());
         holder.center_name.setText(bloodStockModel.getCenter_name());
         holder.location.setText(bloodStockModel.getCenter_location());
+        holder.loader = new ProgressDialog(context);
 
         //Show center name and location if admin is logged in
         DatabaseReference refUser = FirebaseDatabase.getInstance().getReference()
@@ -121,6 +125,7 @@ public class BloodStock_Adapter extends RecyclerView.Adapter<BloodStock_Adapter.
             }
         });
 
+
     }
 
     @Override
@@ -130,8 +135,11 @@ public class BloodStock_Adapter extends RecyclerView.Adapter<BloodStock_Adapter.
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView blood_type, volume, date_added, expiry_date, center_name, location;
-        Button btn_remove;
-        LinearLayout layout_name, layout_location;
+        Button btn_remove, searchBtn;
+        LinearLayout layout_name, layout_location, search;
+        TextInputEditText search_type;
+        ProgressDialog loader;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             blood_type = itemView.findViewById(R.id.blood_type);
@@ -143,6 +151,9 @@ public class BloodStock_Adapter extends RecyclerView.Adapter<BloodStock_Adapter.
             btn_remove = itemView.findViewById(R.id.btn_remove);
             layout_name = itemView.findViewById(R.id.layout_name);
             layout_location = itemView.findViewById(R.id.layout_location);
+            search = itemView.findViewById(R.id.search);
+            searchBtn = itemView.findViewById(R.id.searchBtn);
+            search_type = itemView.findViewById(R.id.search_type);
         }
     }
 }

@@ -166,23 +166,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_edit"
                     android:text="Change date"
                     android:textAllCaps="false"
                     android:layout_weight="1"
+                    android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/buttons_background"
                     android:layout_width="0dp"
                     android:layout_margin="8dp"
                     android:layout_height="wrap_content"/>
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_cancel"
                     android:text="Cancel"
                     android:layout_weight="1"
                     android:textAllCaps="false"
+                    android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/buttons_background"
+                    android:background="@drawable/cancel_button_bg"
                     android:layout_width="0dp"
                     android:layout_margin="8dp"
                     android:layout_height="wrap_content"/>

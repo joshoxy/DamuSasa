@@ -315,6 +315,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent18);
                 break;
 
+            case R.id.blood_stock: //Add Intent for opening search stock page
+                Intent intent19 = new Intent(MainActivity.this, SearchType.class);
+                startActivity(intent19);
+                break;
+
             case R.id.profile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);

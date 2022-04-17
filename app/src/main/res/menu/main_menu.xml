@@ -21,6 +21,11 @@
         android:title="My Appointments"/>
 
     <item
+        android:id="@+id/blood_stock"
+        android:icon="@drawable/ic_bloodtype"
+        android:title="Blood stock"/>
+
+    <item
         android:id="@+id/sentEmail"
         android:icon="@drawable/ic_check"
         android:title="Sent requests"/>

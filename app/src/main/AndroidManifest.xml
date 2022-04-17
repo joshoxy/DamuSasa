@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".SearchType"
+            android:exported="false" />
+        <activity
             android:name=".BloodStock"
             android:exported="false" />
         <activity
