@@ -19,44 +19,37 @@
 
     //Search stock
     <LinearLayout
-        android:padding="5dp"
+        android:padding="10dp"
         android:id="@+id/search"
         android:layout_margin="5dp"
         android:orientation="horizontal"
+        android:background="@drawable/edit_text_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        //Blood type
-        <!--<com.google.android.material.textfield.TextInputLayout
+        <ImageView
+            android:src="@drawable/ic_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutStyle"
-            android:layout_marginTop="10dp"
-            app:boxStrokeColor="#000"
-            app:hintTextAppearance="@drawable/gradient_bg"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            android:layout_height="match_parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Search blood type (format A+)"
-                android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textColorHint="#000"
-                android:drawableStart="@drawable/ic_search"/>
+        <Spinner
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/search_type"
+            android:background="#fff"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:entries="@array/bloodgroups"
+            android:layout_height="wrap_content"/>
 
-        </com.google.android.material.textfield.TextInputLayout>-->
-
-        <EditText
+        <!--<EditText
             android:id="@+id/search_type"
             android:hint=" Search blood type (format A+)"
             android:drawableStart="@drawable/ic_search"
             android:background="@drawable/edit_text_bg"
             android:layout_width="wrap_content"
             android:padding="10dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"/>-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/searchBtn"

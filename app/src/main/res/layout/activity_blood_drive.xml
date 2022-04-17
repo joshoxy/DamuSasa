@@ -180,7 +180,7 @@
                     android:entries="@array/bloodDrive"
                     android:layout_height="wrap_content"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/setUpButton"
                     android:text="Set Up"
                     android:textAllCaps="false"

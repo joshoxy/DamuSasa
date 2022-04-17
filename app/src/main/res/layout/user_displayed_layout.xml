@@ -76,17 +76,18 @@
 
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/emailNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_margin="15dp"
+            android:textColor="@color/white"
             android:background="@drawable/buttons_background"
+            android:visibility="gone"
             android:text="Request"
             android:layout_alignParentRight="true"
-            android:textAllCaps="false"
-            android:visibility="gone" />
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <View

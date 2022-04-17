@@ -60,7 +60,7 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="20dp">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/donorButton"
                     android:text="Donor Registration"
                     android:textAllCaps="false"
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/recipientButton"
                     android:text="Recipient Registration"
                     android:textAllCaps="false"
@@ -90,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/centerButton"
                     android:text="Donation Center Registration"
                     android:textAllCaps="false"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/adminButton"
                     android:text="Admin Registration"
                     android:textAllCaps="false"

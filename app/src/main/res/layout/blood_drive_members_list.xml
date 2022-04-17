@@ -267,10 +267,11 @@
         </LinearLayout>
 
         //Cancel drive only available to donors and admin
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_cancel"
             android:text="Cancel"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"
             android:layout_width="match_parent"

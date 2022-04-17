@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.damusasa.Adapter.AppointmentsAdapter;
 import com.example.damusasa.Adapter.BloodStock_Adapter;
@@ -35,8 +37,8 @@ public class BloodStock extends AppCompatActivity {
     BloodStock_Adapter myAdapter;
     ArrayList<BloodStock_model> list;
     Button searchBtn;
-    EditText search_type;
     ProgressDialog loader;
+    Spinner search_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,9 +125,10 @@ public class BloodStock extends AppCompatActivity {
             public void onClick(View v) {
                 list.clear();
                 myAdapter.notifyDataSetChanged();
-                String type = search_type.getText().toString().trim();
-                if(TextUtils.isEmpty(type)){
-                    search_type.setError("Enter blood type");
+                String type = search_type.getSelectedItem().toString();
+
+                if(type.equals("Select your blood group")){
+                    Toast.makeText(BloodStock.this, "Select a blood group", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

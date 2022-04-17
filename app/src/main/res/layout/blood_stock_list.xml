@@ -201,10 +201,11 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_remove"
             android:text="Remove"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"

@@ -171,11 +171,12 @@
         </LinearLayout>
 
         //Accept drive only available to donor and recipient
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_attend"
             android:text="Attend"
             android:visibility="gone"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"
             android:layout_width="match_parent"
@@ -183,10 +184,11 @@
             android:layout_height="wrap_content"/>
 
         //Cancel drive only available to admin
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_cancel"
             android:text="Cancel"
             android:visibility="gone"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"

@@ -86,7 +86,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addBtn"
                     android:text="Add"
                     android:textAllCaps="false"

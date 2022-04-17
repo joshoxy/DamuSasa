@@ -169,10 +169,11 @@
 
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/c_button_request"
             android:text="Donate"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"
             android:layout_width="match_parent"
