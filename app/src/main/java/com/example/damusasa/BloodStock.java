@@ -79,6 +79,7 @@ public class BloodStock extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 BloodStock_model bloodStockModel = dataSnapshot.getValue(BloodStock_model.class);
                                 list.add(bloodStockModel);
@@ -97,6 +98,7 @@ public class BloodStock extends AppCompatActivity {
                     database.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 BloodStock_model bloodStockModel = dataSnapshot.getValue(BloodStock_model.class);
                                 list.add(bloodStockModel);

@@ -75,6 +75,7 @@ public class BloodDrivesSet extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Blood_Drives_Model blood_drives_model = dataSnapshot.getValue(Blood_Drives_Model.class);
                                 list.add(blood_drives_model);
@@ -94,6 +95,7 @@ public class BloodDrivesSet extends AppCompatActivity {
                     database.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Blood_Drives_Model blood_drives_model = dataSnapshot.getValue(Blood_Drives_Model.class);
                                 list.add(blood_drives_model);

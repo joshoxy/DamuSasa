@@ -33,6 +33,8 @@ public class RequestDonation extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabaseRef;
 
+    //Donation center requesting donation from users
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

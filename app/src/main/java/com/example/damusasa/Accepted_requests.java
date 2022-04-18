@@ -65,6 +65,7 @@ public class Accepted_requests extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Accepted_Requests_Model requests_model = dataSnapshot.getValue(Accepted_Requests_Model.class);
                                 list.add(requests_model);

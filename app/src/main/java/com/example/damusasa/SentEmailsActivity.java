@@ -69,6 +69,7 @@ public class SentEmailsActivity extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Recipient_Requests_Model model = dataSnapshot.getValue(Recipient_Requests_Model.class);
                                 list.add(model);

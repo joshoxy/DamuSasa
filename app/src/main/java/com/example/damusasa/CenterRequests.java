@@ -53,6 +53,7 @@ public class CenterRequests extends AppCompatActivity {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Center_Requests_Model requests = dataSnapshot.getValue(Center_Requests_Model.class);
                     list.add(requests);
