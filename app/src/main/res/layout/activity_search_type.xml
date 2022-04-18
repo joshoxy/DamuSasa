@@ -17,6 +17,47 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_bg"/>
 
+    //Search stock
+    <LinearLayout
+        android:padding="10dp"
+        android:id="@+id/search"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <Spinner
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/search_type"
+            android:background="#fff"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:entries="@array/bloodgroups"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/searchBtn"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_alignParentRight="true"
+            android:textColor="#fff"
+            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:background="@drawable/buttons_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_stock"
