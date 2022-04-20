@@ -74,6 +74,7 @@ public class SearchType extends AppCompatActivity {
                     list.add(bloodStockModel);
 
                     String blood_type = dataSnapshot.child("blood_type").getValue().toString();
+                    //trying to remove duplicates from recycler view
 
                     for(int i=0; i < list.size(); i++){
                         for(int j=0; j < list.size(); j++){
