@@ -21,11 +21,6 @@
         android:title="My Appointments"/>
 
     <item
-        android:id="@+id/blood_stock"
-        android:icon="@drawable/ic_bloodtype"
-        android:title="Blood stock"/>
-
-    <item
         android:id="@+id/sentEmail"
         android:icon="@drawable/ic_check"
         android:title="Sent requests"/>
@@ -36,18 +31,26 @@
         android:title="Compatible with you"/>
 
     <item
+        android:id="@+id/blood_stock"
+        android:icon="@drawable/ic_bloodtype"
+        android:title="Blood stock"/>
+
+    <item
         android:id="@+id/center_requests"
         android:icon="@drawable/ic_hospital"
+        android:visible="false"
         android:title="Donation Center Requests"/>
 
     <item
         android:id="@+id/blood_drives"
+        android:visible="false"
         android:icon="@drawable/ic_drive"
         android:title="Blood Drives"/>
 
     <item
         android:id="@+id/members_drive"
         android:icon="@drawable/ic_people"
+        android:visible="false"
         android:title="Attending blood drives"/>
 
     <item android:title="Blood Groups">

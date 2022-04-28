@@ -200,6 +200,7 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         userList.clear();
+                        userAdapter.notifyDataSetChanged();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             User user = dataSnapshot.getValue(User.class);
                             userList.add(user);
@@ -209,10 +210,9 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                         query1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                userList.clear();
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                    User user = dataSnapshot.getValue(User.class);
-                                    userList.add(user);
+                                    User user1 = dataSnapshot.getValue(User.class);
+                                    userList.add(user1);
                                 }
 
                             }

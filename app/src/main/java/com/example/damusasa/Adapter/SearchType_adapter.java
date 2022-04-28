@@ -54,6 +54,7 @@ public class SearchType_adapter extends RecyclerView.Adapter<SearchType_adapter.
         holder.center_name.setText(bloodStockModel.getCenter_name());
         holder.location.setText(bloodStockModel.getCenter_location());
         holder.loader = new ProgressDialog(context);
+        holder.setIsRecyclable(false);
         String blood = bloodStockModel.getBlood_type();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()

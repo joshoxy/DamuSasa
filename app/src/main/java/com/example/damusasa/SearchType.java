@@ -69,6 +69,7 @@ public class SearchType extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                myAdapter.notifyDataSetChanged();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     BloodStock_model bloodStockModel = dataSnapshot.getValue(BloodStock_model.class);
                     list.add(bloodStockModel);
@@ -79,7 +80,7 @@ public class SearchType extends AppCompatActivity {
                     for(int i=0; i < list.size(); i++){
                         for(int j=0; j < list.size(); j++){
                             if (list.get(i).equals(list.get(j))){
-
+ 
                             }
                         }
                     }

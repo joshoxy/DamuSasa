@@ -147,12 +147,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                    if (type.equals("donor")){
                        nav_menu.findItem(R.id.sentEmail).setTitle("Received requests");
-                       nav_menu.findItem(R.id.notifications).setVisible(true);
                        nav_menu.findItem(R.id.book).setVisible(true);
                        nav_menu.findItem(R.id.appointments).setVisible(true);
+                       nav_menu.findItem(R.id.center_requests).setVisible(true);
+                       nav_menu.findItem(R.id.blood_drives).setVisible(true);
+                       nav_menu.findItem(R.id.members_drive).setVisible(true);
                    }
 
-                   if (type.equals("center")){
+                   if (type.equals("recipient")){
+
 
                    }
 

@@ -71,6 +71,7 @@ public class Blood_drive_members_adapter extends RecyclerView.Adapter<Blood_driv
                     holder.layout_donor_name.setVisibility(View.VISIBLE);
                     holder.layout_donor_phone.setVisibility(View.VISIBLE);
                     holder.layout_blood_type.setVisibility(View.VISIBLE);
+                    holder.button_cancel.setVisibility(View.GONE);
                     //Make this visible so that its view. gone instead
 
                 }
