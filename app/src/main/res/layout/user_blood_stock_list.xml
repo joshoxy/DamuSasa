@@ -145,6 +145,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:layout_weight="1"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttons_background"
             android:layout_width="match_parent"
