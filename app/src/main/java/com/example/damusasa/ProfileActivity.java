@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView type, name, email, idNUmber, phoneNumber, bloodGroup;
     private CircleImageView profileImage;
-    private Button backButton;
+    private Button backButton, editBtn;
     private StorageReference storageReference;
 
     @Override
@@ -50,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         bloodGroup = findViewById(R.id.bloodGroup);
         profileImage = findViewById(R.id.profile_image);
         backButton = findViewById(R.id.backButton);
+        editBtn = findViewById(R.id.editBtn);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(
                 FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -87,6 +88,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfile.class);
                 startActivity(intent);
                 finish();
             }
