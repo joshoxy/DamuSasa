@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DamuSasa">
         <activity
+            android:name=".ML_Model"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity
