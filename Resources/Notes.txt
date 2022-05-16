@@ -1,0 +1,28 @@
+To hide an item on the menu based on who is logged in, go to main_menu.xml and set the item to android:visible="false"
+Then go to main activity and make it visible based on the user
+if (type.equals("donor")){
+                       nav_menu.findItem(R.id.notifications).setVisible(true);
+                   }
+
+Implement on click on the menu with the main activity case and add intent to activity 
+
+His MySalonAdapter is MyBranchAdapter
+//His Salon is my branch
+
+MyBranchAdapter
+intent.putExtra(Common.KEY_STEP, 1);  //Might need to disable this
+
+Booking Activity 
+int step = intent.getIntExtra(Common.KEY_STEP, 0); //Might need to disable this
+
+BookingStep2 initView()
+GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);  //Might need to be 2
+
+if (Common.currentTimeSlot != -1)   //Might need to remove this from Booking Activity step 3
+
+Under BookingInformation.java ynder Model remove all the retun that you added just in case 
+
+DatePickerDialog process is in the BloodDrive Activity 
+
+flower@gmail.com
+flower123
