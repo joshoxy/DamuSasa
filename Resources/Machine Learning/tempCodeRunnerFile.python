@@ -1,0 +1,22 @@
+import numpy as np
+import pandas as pd
+
+from ML3 import KNN
+df = pd.read_csv('transfusion.csv')
+df.sample(5)
+X = df.drop(columns=['donated blood in March 2007'])
+y = df['donated blood in March 2007']
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=2)
+
+#train the model
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+rf = RandomForestClassifier()
+rf.fit(X_train,y_train)
+y_pred = rf.predict(X_test)
+print(accuracy_score(y_test,y_pred))
+
+#save the model in pickle format
+import pickle 
+pickle.dump(KNN,open('model.pkl','wb'))
