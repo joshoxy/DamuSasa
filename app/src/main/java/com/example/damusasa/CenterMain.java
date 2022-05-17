@@ -342,6 +342,11 @@ public class CenterMain extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent19);
                 break;
 
+            case R.id.predict: //Add Intent for predict page
+                Intent intent20 = new Intent(CenterMain.this, ML_Model.class);
+                startActivity(intent20);
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(CenterMain.this, LoginActivity.class);

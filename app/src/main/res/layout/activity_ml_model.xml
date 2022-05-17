@@ -42,6 +42,29 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="20dp">
 
+                //first donation
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextInputLayoutStyle"
+                    app:boxStrokeColor="#000"
+                    app:hintTextAppearance="@drawable/gradient_bg"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/first_don"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Months since first donation"
+                        android:inputType="number"
+                        android:drawablePadding="10dp"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:textColorHint="#000"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 //Last donation
                 <com.google.android.material.textfield.TextInputLayout
@@ -58,30 +81,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Months since last donation"
-                        android:inputType="number"
-                        android:drawablePadding="10dp"
-                        android:textColor="#000"
-                        android:textSize="18sp"
-                        android:textColorHint="#000"/>
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                //first donation
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:theme="@style/TextInputLayoutStyle"
-                    app:boxStrokeColor="#000"
-                    app:hintTextAppearance="@drawable/gradient_bg"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/first_don"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Months since first donation"
                         android:inputType="number"
                         android:drawablePadding="10dp"
                         android:textColor="#000"
@@ -153,6 +152,13 @@
                     android:background="@drawable/buttons_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/result"
+                    android:text=""
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 

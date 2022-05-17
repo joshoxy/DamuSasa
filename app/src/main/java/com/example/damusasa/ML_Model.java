@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +26,7 @@ public class ML_Model extends AppCompatActivity {
 
     private TextInputEditText recency, first_don, total_don, total_blood_donated;
     private Button predict_button;
+    TextView result;
     String url = "https://damuliza.herokuapp.com/";
 
     @Override
@@ -37,23 +39,26 @@ public class ML_Model extends AppCompatActivity {
         first_don = findViewById(R.id.first_don);
         total_don = findViewById(R.id.total_don);
         total_blood_donated = findViewById(R.id.total_blood_donated);
+        result = findViewById(R.id.result);
 
         predict_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // hit the API -> Volley
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener() {
+                        new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
-                                    String data = jsonObject.getString("placement");
+                                    String data = jsonObject.getString("donated blood in March 2007");
+
                                     if(data.equals("1")){
-                                        result.setText("Placement Hoga");
+                                        result.setText("Donated");
                                     }else{
-                                        result.setText("Placement Nahi Hoga");
+                                        result.setText("Not donated");
                                     }
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -64,7 +69,9 @@ public class ML_Model extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(ML_Model.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }){
+                        })
+
+                {
                     @Override
                     protected Map getParams(){
                         Map params = new HashMap();

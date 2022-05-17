@@ -36,6 +36,11 @@
         android:icon="@drawable/ic_people"
         android:title="Attending blood drives"/>
 
+    <item
+        android:id="@+id/predict"
+        android:icon="@drawable/ic_search"
+        android:title="Predict donation"/>
+
     <item android:title="Blood Groups">
         <menu>
             <group android:checkableBehavior="single">
