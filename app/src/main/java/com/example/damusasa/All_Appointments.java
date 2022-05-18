@@ -32,7 +32,7 @@ public class All_Appointments extends AppCompatActivity {
     AppointmentsAdapter myAdapter;
     ArrayList<Appointment_model> list;
 
-    //Appointments for donation center
+    //Displays appointments
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +103,7 @@ public class All_Appointments extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
                                 list.add(user);
@@ -124,6 +125,7 @@ public class All_Appointments extends AppCompatActivity {
                     reference1.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Appointment_model user = dataSnapshot.getValue(Appointment_model.class);
                                 list.add(user);

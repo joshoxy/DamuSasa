@@ -32,6 +32,8 @@ public class Blood_drive_members extends AppCompatActivity {
     ArrayList<blood_drive_members_model> list;
     Blood_drive_members_adapter members_adapter;
 
+    //Activity to show blood drive that user is attending
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,7 @@ public class Blood_drive_members extends AppCompatActivity {
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 blood_drive_members_model membersModel = dataSnapshot.getValue(blood_drive_members_model.class);
                                 list.add(membersModel);
@@ -94,6 +97,7 @@ public class Blood_drive_members extends AppCompatActivity {
                     database.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 blood_drive_members_model membersModel = dataSnapshot.getValue(blood_drive_members_model.class);
                                 list.add(membersModel);

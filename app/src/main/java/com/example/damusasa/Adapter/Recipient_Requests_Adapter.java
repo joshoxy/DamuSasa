@@ -52,6 +52,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
         Recipient_Requests_Model requestsModel = list.get(position);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

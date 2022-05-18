@@ -38,6 +38,7 @@
 
     <item
         android:id="@+id/predict"
+        android:visible="false"
         android:icon="@drawable/ic_search"
         android:title="Predict donation"/>
 

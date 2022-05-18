@@ -260,55 +260,6 @@ public class DonorRegistrationActivity extends AppCompatActivity {
 
             profile_image.setImageURI(resultUri);
 
-            //Tutorial method for picture
-            /*uploadPicture();*/
         }
     }
-
-    //Upload picture method from tutorial
-  /*  private void uploadPicture() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Uploading Image...");
-        progressDialog.show();
-
-        // Create a reference to "mountains.jpg"
-        //His filePath is my resultUri
-        FirebaseStorage imgstorage = FirebaseStorage.getInstance();
-        StorageReference imageRef = imgstorage.getReference("images/" +new Random().nextInt(50));
-
-        imageRef.putFile(resultUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-//                                User obj = new User(uri.toString());
-                               userDatabaseRef.setValue(uri.toString());
-//                                profile_image.setImageResource(R.drawable.ic_profile);
-
-                            }
-                        });
-                        progressDialog.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Image Failed to Upload", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        double progressPercent = (100.00 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                        progressDialog.setMessage("Progress: " + (int) progressPercent + "%");
-                    }
-                });
-
-    }*/
 }

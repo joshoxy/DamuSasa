@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
-
                     DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference()
                             .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -92,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };
+
 
         backButton = findViewById(R.id.backButton);
         login_Email = findViewById(R.id.login_Email);
@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onStart() {

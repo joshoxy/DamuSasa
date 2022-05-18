@@ -38,6 +38,8 @@ public class BloodDrive extends AppCompatActivity {
     private DatabaseReference userDatabaseRef;
     private DatePickerDialog datePickerDialog;
 
+    //Activity that admin uses to set up a new blood drive
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

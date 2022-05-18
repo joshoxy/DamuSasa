@@ -32,6 +32,8 @@ public class BloodDrivesSet extends AppCompatActivity {
     Blood_drives_adapter blood_drives_adapter;
     ArrayList<Blood_Drives_Model> list;
 
+    //Activity to display all the blood drives that have been organized
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
