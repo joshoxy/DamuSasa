@@ -30,4 +30,6 @@ public class Accepted_Requests_Model {
     public String getUser_Id() {
         return user_Id;
     }
+
+
 }

@@ -174,7 +174,7 @@ public class Recipient_Requests_Adapter extends RecyclerView.Adapter<Recipient_R
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                                                     dataSnapshot.getRef().removeValue();
-                                                    Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
                                                     ((Activity)context).finish();
                                                 }
                                             }

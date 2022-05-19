@@ -106,7 +106,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                                                     dataSnapshot.getRef().removeValue();
-                                                    Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(context, "Successfully cancelled", Toast.LENGTH_SHORT).show();
                                                     ((Activity)context).finish();
                                                 }
                                             }
@@ -196,8 +196,8 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                                                     @Override
                                                     public void onComplete(@NonNull Task task) {
                                                         Toast.makeText(context, "Successfully changed", Toast.LENGTH_SHORT).show();
-                                                        ((Activity)context).finish();
                                                         holder.datePickerDialog.dismiss();
+                                                        ((Activity)context).finish();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -230,6 +230,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                                             holder.datePickerDialog.show();
                                             //show dialog
                                         }
+
                                         /*holder.datePickerDialog.show();*/
                                         //Paste up to here
                                     }

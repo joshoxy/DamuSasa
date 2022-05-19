@@ -1,7 +1,7 @@
 package com.example.damusasa.Model;
 
 public class Center_Requests_Model {
-    String name, location, address, bloodGroup, phone;
+    String name, location, address, bloodGroup, phone, type;
 
     public String getName() {
         return name;
@@ -21,5 +21,9 @@ public class Center_Requests_Model {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getType() {
+        return type;
     }
 }

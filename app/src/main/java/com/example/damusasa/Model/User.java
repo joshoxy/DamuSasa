@@ -1,12 +1,12 @@
 package com.example.damusasa.Model;
 
 public class User {
-    String name, email, bloodGroup, idNumber, phoneNumber, search, type, profilepictureurl;
+    String name, email, bloodGroup, idNumber, phoneNumber, search, type, profilepictureurl,id;
 
     public User() {
     }
 
-    public User(String name, String email, String bloodGroup, String idNumber, String phoneNumber, String search, String type, String profilepictureurl) {
+    public User(String name, String email, String bloodGroup, String idNumber, String phoneNumber, String search, String type, String profilepictureurl, String id) {
         this.name = name;
         this.email = email;
         this.bloodGroup = bloodGroup;
@@ -15,8 +15,8 @@ public class User {
         this.search = search;
         this.type = type;
         this.profilepictureurl = profilepictureurl;
+        this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -80,5 +80,13 @@ public class User {
 
     public void setProfilepictureurl(String profilepictureurl) {
         this.profilepictureurl = profilepictureurl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

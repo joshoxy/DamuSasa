@@ -94,7 +94,7 @@ public class RequestDonation extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(RequestDonation.this, "Request Upload Successful", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RequestDonation.this, "Request Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(RequestDonation.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                     }

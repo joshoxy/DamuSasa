@@ -117,9 +117,9 @@ public class BookingStep3Fragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task task) {
                                     resetStaticActivity();  //Allow user to book again
-                                    getActivity().finish(); //Close Activity
-                                    Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
-
+                                    //getActivity().finish(); //Close Activity
+                                    //Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+                                    finishActivity();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -170,6 +170,13 @@ public class BookingStep3Fragment extends Fragment {
         Common.currentTimeSlot = -1;
         Common.currentBarber = null;
         Common.currentDate.add(Calendar.DATE, 0);  //Current date
+    }
+
+    private void finishActivity() {
+        if(getActivity() != null) {
+            getActivity().finish();
+            Toast.makeText(getContext(), "Successfully booked!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
